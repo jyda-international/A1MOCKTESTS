@@ -3,874 +3,1077 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Deutsch mit Jitu | TELC Deutsch A1 Mock Examination</title>
+<title>Deutsch mit Jitu | A1 Mock Test</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
 body{
-    margin:0;
-    font-family:Arial,Helvetica,sans-serif;
-    background:#080a0d;
-    color:#f3f4f6;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#08090d;
+  color:#f5f5f5;
+  min-height:100vh;
 }
 
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-
-.topbar{
-    position:sticky;
-    top:0;
-    z-index:100;
-    background:#10141a;
-    border-bottom:1px solid #252b35;
-    padding:14px 18px;
+header{
+  background:linear-gradient(135deg,#11131a,#191c25);
+  border-bottom:1px solid #292d38;
+  padding:18px 22px;
+  position:sticky;
+  top:0;
+  z-index:50;
 }
 
-.topbar-inner{
-    max-width:1250px;
-    margin:auto;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
+.brand{
+  font-size:25px;
+  font-weight:800;
+  color:#fff;
 }
 
-.logo{
-    font-size:20px;
-    font-weight:800;
+.brand span{
+  color:#d9a441;
 }
 
-.logo span{color:#e7b65b}
-
-.timer{
-    background:#1b2028;
-    border:1px solid #343b47;
-    padding:9px 16px;
-    border-radius:10px;
-    font-weight:800;
-    color:#ffd166;
+.subbrand{
+  font-size:12px;
+  color:#8f96a3;
+  margin-top:5px;
 }
-
-/* ================= START ================= */
-
-.start-screen{
-    position:fixed;
-    inset:0;
-    z-index:99999;
-    background:
-        radial-gradient(circle at top,#202731 0,#080a0d 55%);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-}
-
-.start-box{
-    width:100%;
-    max-width:520px;
-    background:#11161d;
-    border:1px solid #343c47;
-    border-radius:22px;
-    padding:35px;
-    text-align:center;
-    box-shadow:0 20px 70px rgba(0,0,0,.45);
-}
-
-.start-logo{
-    font-size:28px;
-    font-weight:900;
-}
-
-.start-logo span{color:#e7b65b}
-
-.start-box h1{
-    margin:15px 0 8px;
-    font-size:28px;
-}
-
-.start-box p{
-    color:#9ca3af;
-    line-height:1.6;
-}
-
-.name-input{
-    width:100%;
-    padding:14px;
-    margin:18px 0 12px;
-    background:#0b0f14;
-    border:1px solid #3b4350;
-    border-radius:10px;
-    color:white;
-    outline:none;
-}
-
-.name-input:focus{
-    border-color:#e7b65b;
-}
-
-.start-btn{
-    width:100%;
-    padding:14px;
-    border:0;
-    border-radius:11px;
-    background:#e7b65b;
-    color:#111;
-    font-weight:900;
-    font-size:16px;
-}
-
-/* ================= MAIN ================= */
 
 .container{
-    max-width:1250px;
-    margin:auto;
-    padding:22px;
+  width:min(1100px,94%);
+  margin:25px auto 80px;
 }
-
-.exam-head{
-    background:linear-gradient(135deg,#11161d,#171d26);
-    border:1px solid #292f39;
-    border-radius:18px;
-    padding:22px;
-    margin-bottom:18px;
-}
-
-.exam-head h1{
-    margin:0 0 7px;
-    font-size:28px;
-}
-
-.exam-head p{
-    margin:0;
-    color:#9ca3af;
-}
-
-.student-name{
-    margin-top:10px;
-    color:#e7b65b;
-    font-weight:800;
-}
-
-.progress-wrap{
-    margin-top:18px;
-    background:#0b0e12;
-    height:9px;
-    border-radius:20px;
-    overflow:hidden;
-}
-
-.progress{
-    height:100%;
-    width:0%;
-    background:#e7b65b;
-    transition:.25s;
-}
-
-.tabs{
-    display:flex;
-    gap:8px;
-    overflow:auto;
-    margin-bottom:18px;
-}
-
-.tab{
-    flex:1;
-    min-width:130px;
-    padding:12px;
-    border:1px solid #303640;
-    background:#12171d;
-    color:#cbd5e1;
-    border-radius:10px;
-}
-
-.tab.active{
-    background:#e7b65b;
-    color:#111;
-    border-color:#e7b65b;
-    font-weight:800;
-}
-
-.section{display:none}
-.section.active{display:block}
 
 .card{
-    background:#11161d;
-    border:1px solid #282f39;
-    border-radius:16px;
-    padding:20px;
-    margin-bottom:18px;
+  background:#11141b;
+  border:1px solid #282d38;
+  border-radius:16px;
+  padding:25px;
+  margin-bottom:20px;
+  box-shadow:0 15px 50px rgba(0,0,0,.25);
 }
 
-.card h2{
-    margin-top:0;
-    color:#e7b65b;
+h1,h2,h3{
+  color:#fff;
 }
 
-.question{
-    border:1px solid #292f39;
-    background:#0d1116;
-    border-radius:13px;
-    padding:16px;
-    margin:13px 0;
+h1{
+  font-size:32px;
+  margin-bottom:10px;
 }
 
-.qtitle{
-    font-weight:700;
-    margin-bottom:12px;
+h2{
+  font-size:22px;
+  margin-bottom:15px;
 }
 
-.option{
-    display:block;
-    padding:10px;
-    margin:6px 0;
-    border-radius:8px;
-    cursor:pointer;
+h3{
+  font-size:17px;
+  margin-bottom:12px;
 }
 
-.option:hover{background:#181e26}
-
-.option input{
-    margin-right:9px;
+p{
+  line-height:1.65;
 }
 
-.passage{
-    background:#171d24;
-    border-left:4px solid #e7b65b;
-    padding:18px;
-    border-radius:10px;
-    line-height:1.75;
-    color:#e5e7eb;
+.muted{
+  color:#9299a6;
 }
 
-.notice{
-    background:#171d24;
-    border:1px solid #343c47;
-    padding:15px;
-    border-radius:10px;
-    margin:15px 0;
-    color:#d1d5db;
+.gold{
+  color:#d9a441;
 }
 
-.audio-box{
-    background:#171d24;
-    border:1px solid #343c47;
-    padding:18px;
-    border-radius:10px;
-    margin-bottom:18px;
-    text-align:center;
+input,textarea,select{
+  width:100%;
+  background:#0a0c11;
+  color:#fff;
+  border:1px solid #353b48;
+  border-radius:10px;
+  padding:13px;
+  outline:none;
+  font-size:15px;
 }
 
-.audio-status{
-    margin-top:10px;
-    color:#9ca3af;
-    font-size:14px;
-}
-
-.play{
-    background:#e7b65b;
-    border:0;
-    color:#111;
-    font-weight:800;
-    padding:11px 20px;
-    border-radius:8px;
-}
-
-.play:disabled{
-    opacity:.5;
-    cursor:not-allowed;
-}
-
-.form-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:14px;
-    margin-top:18px;
-}
-
-.form-field{
-    background:#0d1116;
-    border:1px solid #292f39;
-    padding:15px;
-    border-radius:10px;
-}
-
-.form-field label{
-    display:block;
-    margin-bottom:8px;
-    color:#cbd5e1;
-    font-weight:700;
-}
-
-.form-field input{
-    width:100%;
-    padding:12px;
-    background:#080c10;
-    color:white;
-    border:1px solid #3b4350;
-    border-radius:8px;
-    outline:none;
-}
-
-.form-field input:focus{
-    border-color:#e7b65b;
-}
-
-.checkbox-group{
-    display:flex;
-    gap:18px;
-    flex-wrap:wrap;
-}
-
-.checkbox-option{
-    background:#080c10;
-    border:1px solid #343c47;
-    padding:10px 14px;
-    border-radius:8px;
+input:focus,textarea:focus{
+  border-color:#d9a441;
 }
 
 textarea{
-    width:100%;
-    min-height:260px;
-    resize:vertical;
-    padding:15px;
-    background:#0b0f14;
-    border:1px solid #343c47;
-    border-radius:10px;
-    color:white;
-    line-height:1.6;
+  min-height:180px;
+  resize:vertical;
+  line-height:1.6;
 }
 
-.wordcount{
-    margin-top:7px;
-    color:#9ca3af;
+.btn{
+  border:0;
+  border-radius:10px;
+  padding:13px 20px;
+  font-weight:700;
+  cursor:pointer;
+  font-size:15px;
+  transition:.2s;
 }
 
-.submit-wrap{
-    text-align:center;
-    padding:25px 0 50px;
+.btn:hover{
+  transform:translateY(-1px);
 }
 
-.submit{
-    background:#e7b65b;
-    border:0;
-    color:#111;
-    font-weight:900;
-    padding:15px 35px;
-    border-radius:12px;
-    font-size:17px;
+.primary{
+  background:#d9a441;
+  color:#090909;
 }
 
-/* ================= RESULT ================= */
-
-#result{
-    display:none;
+.secondary{
+  background:#242936;
+  color:#fff;
 }
 
-.result-main{
-    background:linear-gradient(135deg,#131922,#1c232d);
-    border:1px solid #3b4350;
-    border-radius:20px;
-    padding:30px 25px;
-    margin-bottom:18px;
-    text-align:center;
+.danger{
+  background:#9d3030;
+  color:#fff;
 }
 
-.result-name{
-    font-size:20px;
-    color:#d1d5db;
-    margin-bottom:12px;
+.start{
+  text-align:center;
+  padding:55px 25px;
 }
 
-.total-score{
-    font-size:48px;
-    font-weight:900;
-    color:#e7b65b;
+.start .logo{
+  font-size:42px;
+  font-weight:900;
+  margin-bottom:8px;
 }
 
-.percent{
-    font-size:22px;
-    margin-top:5px;
+.start .logo span{
+  color:#d9a441;
 }
 
-.score-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
+.start p{
+  max-width:700px;
+  margin:10px auto;
 }
 
-.score-box{
-    background:#11161d;
-    border:1px solid #2c333e;
-    border-radius:13px;
-    padding:18px;
-    text-align:center;
+.nameBox{
+  max-width:480px;
+  margin:30px auto 15px;
+  text-align:left;
 }
 
-.score-box strong{
-    display:block;
-    font-size:24px;
-    color:#e7b65b;
-    margin-top:6px;
+.tabs{
+  display:flex;
+  gap:8px;
+  overflow:auto;
+  margin-bottom:20px;
+  position:sticky;
+  top:82px;
+  z-index:30;
+  background:#08090d;
+  padding:10px 0;
 }
 
-.eval{
-    background:#11161d;
-    border:1px solid #2c333e;
-    border-radius:15px;
-    padding:20px;
-    line-height:1.7;
-    margin-top:18px;
+.tab{
+  background:#171a22;
+  color:#aab0bc;
+  border:1px solid #292e39;
+  padding:11px 18px;
+  border-radius:9px;
+  cursor:pointer;
+  white-space:nowrap;
 }
 
-.eval h2{color:#e7b65b}
-
-.website-btn,
-.pdf-btn{
-    display:inline-block;
-    margin-top:20px;
-    padding:13px 22px;
-    border-radius:10px;
-    font-weight:900;
-    text-decoration:none;
+.tab.active{
+  background:#d9a441;
+  color:#090909;
+  border-color:#d9a441;
+  font-weight:800;
 }
 
-.website-btn{
-    background:#e7b65b;
-    color:#111;
+.section{
+  display:none;
 }
 
-.pdf-btn{
-    background:#242b35;
-    color:white;
-    border:1px solid #454e5b;
-    margin-left:8px;
+.section.active{
+  display:block;
 }
 
-/* ================= LOCK ================= */
-
-.locked{
-    position:fixed;
-    inset:0;
-    background:#050607;
-    z-index:999999;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:25px;
+.timer{
+  position:fixed;
+  right:18px;
+  top:90px;
+  z-index:60;
+  background:#151820;
+  border:1px solid #343a47;
+  padding:10px 15px;
+  border-radius:10px;
+  font-weight:800;
 }
 
-.locked.show{
-    display:flex;
+.timer.warning{
+  color:#ff6b6b;
+  border-color:#a83232;
 }
 
-.lock-box{
-    max-width:520px;
-    background:#11161d;
-    border:1px solid #3b4350;
-    border-radius:18px;
-    padding:30px;
+.question{
+  background:#0c0f15;
+  border:1px solid #282e39;
+  border-radius:13px;
+  padding:18px;
+  margin:14px 0;
 }
 
-.lock-box h1{
-    color:#ff6565;
+.questionTitle{
+  font-weight:800;
+  margin-bottom:12px;
 }
 
-.lock-box p{
-    color:#cbd5e1;
-    line-height:1.6;
+.option{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  padding:10px;
+  border-radius:8px;
+  cursor:pointer;
 }
 
-/* ================= MOBILE ================= */
-
-@media(max-width:800px){
-
-    .score-grid{
-        grid-template-columns:1fr;
-    }
-
-    .form-grid{
-        grid-template-columns:1fr;
-    }
-
-    .container{
-        padding:12px;
-    }
-
-    .exam-head h1{
-        font-size:22px;
-    }
+.option:hover{
+  background:#161a22;
 }
 
-@media(max-width:500px){
+.option input{
+  width:auto;
+  margin-top:4px;
+}
 
-    .topbar-inner{
-        align-items:flex-start;
-    }
+.readText{
+  white-space:pre-line;
+  background:#0a0d12;
+  border-left:3px solid #d9a441;
+  padding:18px;
+  border-radius:8px;
+  margin:12px 0;
+  line-height:1.75;
+}
 
-    .timer{
-        font-size:14px;
-    }
+.adBox{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin:15px 0;
+}
 
-    .start-box{
-        padding:25px 20px;
-    }
+.ad{
+  background:#080b10;
+  border:1px solid #333946;
+  border-radius:10px;
+  padding:17px;
+  min-height:150px;
+  line-height:1.55;
+}
 
-    .pdf-btn{
-        margin-left:0;
-        margin-top:10px;
-    }
+.ad strong{
+  color:#d9a441;
+}
+
+.formGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:13px;
+}
+
+.writeToolbar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-bottom:8px;
+}
+
+.toolBtn{
+  background:#252a34;
+  color:#fff;
+  border:1px solid #3a414e;
+  border-radius:7px;
+  padding:7px 10px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.formBox{
+  background:#0a0d12;
+  border:1px solid #333946;
+  padding:20px;
+  border-radius:12px;
+  margin-top:15px;
+}
+
+.formRow{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin:10px 0;
+}
+
+.result{
+  display:none;
+}
+
+.resultHeader{
+  text-align:center;
+  padding:25px 10px;
+}
+
+.resultHeader h1{
+  color:#d9a441;
+}
+
+.scoreBig{
+  font-size:55px;
+  font-weight:900;
+  margin:15px 0;
+}
+
+.scoreTable{
+  width:100%;
+  border-collapse:collapse;
+  margin:20px 0;
+}
+
+.scoreTable th,
+.scoreTable td{
+  padding:13px;
+  border-bottom:1px solid #303541;
+  text-align:left;
+}
+
+.scoreTable th{
+  color:#d9a441;
+}
+
+.progress{
+  height:10px;
+  background:#252a33;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress div{
+  height:100%;
+  background:#d9a441;
+}
+
+.footer{
+  text-align:center;
+  color:#717885;
+  font-size:12px;
+  margin-top:35px;
+}
+
+.badge{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:20px;
+  background:#1c212b;
+  color:#d9a441;
+  font-weight:700;
+  font-size:12px;
+}
+
+.notice{
+  background:#18130a;
+  border:1px solid #5e461b;
+  color:#e7c36f;
+  padding:14px;
+  border-radius:10px;
+  margin:15px 0;
+}
+
+.hidden{
+  display:none!important;
+}
+
+@media(max-width:700px){
+  h1{font-size:26px}
+  .start .logo{font-size:32px}
+  .adBox,
+  .formGrid,
+  .formRow{
+    grid-template-columns:1fr;
+  }
+  .timer{
+    top:auto;
+    bottom:15px;
+    right:15px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= START SCREEN ================= -->
-
-<div class="start-screen" id="startScreen">
-
-    <div class="start-box">
-
-        <div class="start-logo">
-            Deutsch <span>mit Jitu</span>
-        </div>
-
-        <h1>TELC Deutsch A1</h1>
-
-        <p>
-            Start Deutsch 1 • Übungstest 1<br>
-            Hören • Lesen • Schreiben
-        </p>
-
-        <p>
-            ⏱️ Exam Duration: <b>70 Minutes</b>
-        </p>
-
-        <input
-            type="text"
-            id="studentName"
-            class="name-input"
-            placeholder="Enter your full name"
-            maxlength="60"
-            autocomplete="name"
-        >
-
-        <button
-            class="start-btn"
-            onclick="beginExam()"
-        >
-            🚀 START EXAM
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- ================= TOPBAR ================= -->
-
-<header class="topbar" id="topbar">
-
-    <div class="topbar-inner">
-
-        <div class="logo">
-            Deutsch <span>mit Jitu</span>
-        </div>
-
-        <div class="timer" id="timer">
-            70:00
-        </div>
-
-    </div>
-
+<header>
+  <div class="brand">Deutsch mit <span>Jitu</span></div>
+  <div class="subbrand">A Dahiya Global Company · Founded by Jatin Dahiya</div>
 </header>
 
+<div class="timer hidden" id="timer">70:00</div>
 
-<!-- ================= EXAM ================= -->
+<div class="container">
 
-<main class="container" id="exam">
+<!-- START -->
+<section id="startScreen" class="card start">
 
-    <div class="exam-head">
+  <div class="logo">DEUTSCH MIT <span>JITU</span></div>
 
-        <h1>TELC Deutsch A1 – Mock Examination</h1>
+  <h1>Start Deutsch 1 · A1 Mock Test</h1>
 
-        <p>
-            Start Deutsch 1 • Hören • Lesen • Schreiben
-        </p>
+  <p class="muted">
+    Hören · Lesen · Schreiben
+  </p>
 
-        <div class="student-name">
-            Candidate:
-            <span id="candidateName">—</span>
-        </div>
+  <div class="notice">
+    Bitte geben Sie Ihren Namen ein, bevor Sie den Test starten.
+  </div>
 
-        <div class="progress-wrap">
-            <div class="progress" id="progress"></div>
-        </div>
+  <div class="nameBox">
+    <label>Student Name</label>
+    <input id="studentName" type="text" placeholder="Enter your full name">
+  </div>
 
-    </div>
+  <button class="btn primary" onclick="startTest()">
+    START TEST
+  </button>
 
-
-    <div class="tabs">
-
-        <button
-            class="tab active"
-            onclick="showSection('reading',this)"
-        >
-            📖 Lesen
-        </button>
-
-        <button
-            class="tab"
-            onclick="showSection('listening',this)"
-        >
-            🎧 Hören
-        </button>
-
-        <button
-            class="tab"
-            onclick="showSection('writing',this)"
-        >
-            ✍️ Schreiben
-        </button>
-
-    </div>
-
-
-<!-- ================= READING ================= -->
-
-<section id="reading" class="section active">
-
-<div class="card">
-
-<h2>Lesen – Teil 1</h2>
-
-<p>
-Sind die Aussagen 1–5 richtig (+) oder falsch (–)?
-</p>
-
-<div class="passage">
-
-<b>Hallo Li,</b><br><br>
-
-danke für deine Mail. Dein Zug kommt hier in Hannover
-um 12.36 Uhr an. Ich bin ab 12.15 Uhr im Hauptbahnhof
-und warte auf dich vor der Auskunft.<br><br>
-
-Du kannst mich den ganzen Vormittag auf meinem Handy
-erreichen.
-
-<br><br>
-
-Deine<br>
-Karin
-
-</div>
-
-<div id="readingPart1"></div>
-
-</div>
-
-
-<div class="card">
-
-<h2>Lesen – Teil 2</h2>
-
-<p>
-Lesen Sie die Texte und die Aufgaben 6–10.
-Welche Anzeige ist interessant für Sie?
-Kreuzen Sie an: a oder b.
-</p>
-
-<div class="notice">
-Lesen Sie jede Situation aufmerksam und wählen Sie die passende Anzeige.
-</div>
-
-<div id="readingPart2"></div>
-
-</div>
-
-
-<div class="card">
-
-<h2>Lesen – Teil 3</h2>
-
-<p>
-Lesen Sie die Texte und die Aufgaben 11–15.
-Kreuzen Sie an: Richtig (+) oder falsch (–).
-</p>
-
-<div id="readingPart3"></div>
-
-</div>
+  <p class="muted" style="margin-top:20px;font-size:13px">
+    70 Minuten · Antworten werden automatisch ausgewertet
+  </p>
 
 </section>
 
 
-<!-- ================= LISTENING ================= -->
+<!-- TEST -->
+<section id="testScreen" class="hidden">
 
-<section id="listening" class="section">
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('hoeren',this)">Hören</button>
+    <button class="tab" onclick="showTab('lesen',this)">Lesen</button>
+    <button class="tab" onclick="showTab('schreiben',this)">Schreiben</button>
+  </div>
+
+
+<!-- ================= HÖREN ================= -->
+<div id="hoeren" class="section active">
 
 <div class="card">
 
-<h2>Hören – ca. 20 Minuten</h2>
+<h2>Hören</h2>
 
-<div class="notice">
+<p class="muted">
+ca. 20 Minuten Hören
+</p>
 
+<p style="margin-top:12px">
 Dieser Test hat drei Teile.<br>
 Sie hören kurze Gespräche und Ansagen.<br>
-Zu jedem Text gibt es eine Aufgabe.<br><br>
-
-<b>Wichtig:</b> Das Original-Audio läuft als eine zusammenhängende Aufnahme.
-Die Aufnahme soll während des Tests nicht angehalten werden.
-
-</div>
-
-<div class="audio-box">
-
-<b>🎧 TELC Hören – Original Audio</b>
-
-<br><br>
-
-<audio
-id="telcAudio"
-preload="metadata"
-src="AUDIO-2026-09-21-13-51-17.mp3"
-></audio>
-
-<button
-id="audioStart"
-class="play"
-onclick="startListeningAudio()"
->
-▶️ START HÖREN
-</button>
-
-<div
-id="audioStatus"
-class="audio-status"
->
-Die Audioaufnahme wurde noch nicht gestartet.
-</div>
-
-</div>
-
-
-<h3>Teil 1 – Kreuzen Sie an: a, b oder c.</h3>
-
-<div id="listeningPart1"></div>
-
-
-<h3>Teil 2 – Richtig (+) oder falsch (–)?</h3>
-
-<div id="listeningPart2"></div>
-
-
-<h3>Teil 3 – Kreuzen Sie an: a, b oder c.</h3>
-
-<div id="listeningPart3"></div>
-
-</div>
-
-</section>
-
-
-<!-- ================= WRITING ================= -->
-
-<section id="writing" class="section">
-
-<div class="card">
-
-<h2>Schreiben – Teil 1</h2>
-
-<p>
-Ihre Freundin, Eva Kadavy, macht mit ihrem Mann und ihren
-beiden Söhnen (8 und 11 Jahre alt) Urlaub in Seeheim.
-Im Reisebüro bucht sie für den nächsten Sonntag eine
-Busfahrt um den Bodensee. Frau Kadavy hat keine Kreditkarte.
-Schreiben Sie die fünf fehlenden Informationen in das Formular.
+Zu jedem Text gibt es eine Aufgabe.<br>
+Lesen Sie zuerst die Aufgabe,<br>
+hören Sie dann den Text dazu.<br>
+Kreuzen Sie die richtige Lösung an.<br>
+Schreiben Sie zum Schluss Ihre Lösungen auf den Antwortbogen.
 </p>
 
-
-<div class="form-grid">
-
-<div class="form-field">
-
-<label>Anzahl der Personen</label>
-
-<input
-type="text"
-id="writePersons"
-placeholder="Ihre Antwort"
->
+<div class="notice">
+Die Tonaufnahme ist die natürliche Audioaufnahme zum TELC Start Deutsch 1 Übungstest 1.
 </div>
 
-
-<div class="form-field">
-
-<label>Davon Kinder</label>
-
-<input
-type="text"
-id="writeChildren"
-placeholder="Ihre Antwort"
->
-</div>
-
-
-<div class="form-field">
-
-<label>PLZ, Urlaubsort</label>
-
-<input
-type="text"
-id="writePlace"
-placeholder="Ihre Antwort"
->
-</div>
-
-
-<div class="form-field">
-
-<label>Zahlungsweise</label>
-
-<div class="checkbox-group">
-
-<label class="checkbox-option">
-<input
-type="radio"
-name="payment"
-value="Bar"
->
-Bar
-</label>
-
-<label class="checkbox-option">
-<input
-type="radio"
-name="payment"
-value="Kreditkarte"
->
-Kreditkarte
-</label>
-
-</div>
+<audio id="audioPlayer"
+controls
+preload="metadata"
+style="width:100%;margin-top:15px">
+<source src="https://shop.telc.net/media/catalog/product/file/t/e/telc_deutsch_a1_uebungstest_1.mp3" type="audio/mpeg">
+Ihr Browser unterstützt die Audio-Wiedergabe nicht.
+</audio>
 
 </div>
 
 
-<div class="form-field">
+<div class="card">
 
-<label>Reisetermin</label>
+<h2>Hören, Teil 1</h2>
 
-<input
-type="text"
-id="writeDate"
-placeholder="Ihre Antwort"
->
+<p class="muted">
+Kreuzen Sie an: a, b oder c.<br>
+Sie hören jeden Text zweimal.
+</p>
+
+<div class="question">
+<div class="questionTitle">1 Was kostet der Pullover?</div>
+<label class="option"><input type="radio" name="h1" value="a"> a&nbsp; 30,00 €</label>
+<label class="option"><input type="radio" name="h1" value="b"> b&nbsp; 95,00 €</label>
+<label class="option"><input type="radio" name="h1" value="c"> c&nbsp; 19,95 €</label>
+</div>
+
+<div class="question">
+<div class="questionTitle">2 Wie spät ist es?</div>
+<label class="option"><input type="radio" name="h2" value="a"> a&nbsp; 15.00 Uhr</label>
+<label class="option"><input type="radio" name="h2" value="b"> b&nbsp; Gleich 17.00 Uhr</label>
+<label class="option"><input type="radio" name="h2" value="c"> c&nbsp; 16.30 Uhr</label>
+</div>
+
+<div class="question">
+<div class="questionTitle">3 Was isst die Frau im Restaurant?</div>
+<label class="option"><input type="radio" name="h3" value="a"> a&nbsp; Pommes</label>
+<label class="option"><input type="radio" name="h3" value="b"> b&nbsp; Fisch</label>
+<label class="option"><input type="radio" name="h3" value="c"> c&nbsp; Wurst</label>
+</div>
+
+<div class="question">
+<div class="questionTitle">4 In welche Klasse geht Frau Hegers Sohn?</div>
+<label class="option"><input type="radio" name="h4" value="a"> a&nbsp; 9b</label>
+<label class="option"><input type="radio" name="h4" value="b"> b&nbsp; 3a</label>
+<label class="option"><input type="radio" name="h4" value="c"> c&nbsp; 4a</label>
+</div>
+
+<div class="question">
+<div class="questionTitle">5 Wie kommt die Frau in den 2. Stock?</div>
+<label class="option"><input type="radio" name="h5" value="a"> a&nbsp; Mit dem Aufzug</label>
+<label class="option"><input type="radio" name="h5" value="b"> b&nbsp; Auf der Treppe um die Ecke</label>
+<label class="option"><input type="radio" name="h5" value="c"> c&nbsp; Mit der Rolltreppe</label>
+</div>
+
+<div class="question">
+<div class="questionTitle">6 Wohin fährt Herr Albers?</div>
+<label class="option"><input type="radio" name="h6" value="a"> a&nbsp; In Urlaub ans Meer</label>
+<label class="option"><input type="radio" name="h6" value="b"> b&nbsp; Zur Arbeit</label>
+<label class="option"><input type="radio" name="h6" value="c"> c&nbsp; Zur Familie</label>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>Hören, Teil 2</h2>
+
+<p class="muted">
+Kreuzen Sie an: Richtig (+) oder falsch (–)?<br>
+Sie hören jeden Text einmal.
+</p>
+
+<div class="question">
+<div class="questionTitle">7 Die Kunden sollen die Weihnachtsfeier besuchen.</div>
+<label class="option"><input type="radio" name="h7" value="+"> richtig (+)</label>
+<label class="option"><input type="radio" name="h7" value="-"> falsch (–)</label>
+</div>
+
+<div class="question">
+<div class="questionTitle">8 Die Fahrgäste sollen sich im Restaurant treffen.</div>
+<label class="option"><input type="radio" name="h8" value="+"> richtig (+)</label>
+<label class="option"><input type="radio" name="h8" value="-"> falsch (–)</label>
+</div>
+
+<div class="question">
+<div class="questionTitle">9 Die Fahrgäste sollen im Zug bleiben.</div>
+<label class="option"><input type="radio" name="h9" value="+"> richtig (+)</label>
+<label class="option"><input type="radio" name="h9" value="-"> falsch (–)</label>
+</div>
+
+<div class="question">
+<div class="questionTitle">10 Der Herr soll sofort zum Schalter kommen.</div>
+<label class="option"><input type="radio" name="h10" value="+"> richtig (+)</label>
+<label class="option"><input type="radio" name="h10" value="-"> falsch (–)</label>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>Hören, Teil 3</h2>
+
+<p class="muted">
+Kreuzen Sie an: a, b oder c.<br>
+Sie hören jeden Text zweimal.
+</p>
+
+<div class="question">
+<div class="questionTitle">11 Die Nummer ist:</div>
+<label class="option"><input type="radio" name="h11" value="a"> a&nbsp; 11833</label>
+<label class="option"><input type="radio" name="h11" value="b"> b&nbsp; 11883</label>
+<label class="option"><input type="radio" name="h11" value="c"> c&nbsp; 12833</label>
+</div>
+
+<div class="question">
+<div class="questionTitle">12 Wo genau treffen sich die Männer?</div>
+<label class="option"><input type="radio" name="h12" value="a"> a&nbsp; Am Zug</label>
+<label class="option"><input type="radio" name="h12" value="b"> b&nbsp; Am Bahnhof</label>
+<label class="option"><input type="radio" name="h12" value="c"> c&nbsp; An der Information</label>
+</div>
+
+<div class="question">
+<div class="questionTitle">13 Wie lange will der Mann noch warten?</div>
+<label class="option"><input type="radio" name="h13" value="a"> a&nbsp; 20 Minuten</label>
+<label class="option"><input type="radio" name="h13" value="b"> b&nbsp; 2 Minuten</label>
+<label class="option"><input type="radio" name="h13" value="c"> c&nbsp; 10 Minuten</label>
+</div>
+
+<div class="question">
+<div class="questionTitle">14 An welchem Tag will die Frau kommen?</div>
+<label class="option"><input type="radio" name="h14" value="a"> a&nbsp; Am Montag</label>
+<label class="option"><input type="radio" name="h14" value="b"> b&nbsp; Am Sonntag</label>
+<label class="option"><input type="radio" name="h14" value="c"> c&nbsp; Am Samstag</label>
+</div>
+
+<div class="question">
+<div class="questionTitle">15 Was ist kaputt?</div>
+<label class="option"><input type="radio" name="h15" value="a"> a&nbsp; Der Fernseher</label>
+<label class="option"><input type="radio" name="h15" value="b"> b&nbsp; Der Computer</label>
+<label class="option"><input type="radio" name="h15" value="c"> c&nbsp; Das Handy</label>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ================= LESEN ================= -->
+<div id="lesen" class="section">
+
+<div class="card">
+
+<h2>Lesen</h2>
+
+<p class="muted">
+Lesen, circa 25 Minuten
+</p>
+
+<p style="margin-top:10px">
+Dieser Test hat drei Teile.<br>
+Sie lesen kurze Briefe, Anzeigen etc.<br>
+Zu jedem Text gibt es Aufgaben.<br>
+Kreuzen Sie die richtige Lösung an.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>Lesen, Teil 1</h2>
+
+<p class="muted">
+Sind die Aussagen 1–5 richtig (+) oder falsch (–)?<br>
+Kreuzen Sie an.
+</p>
+
+<div class="readText">Hallo Li,
+danke für deine Mail. Dein Zug kommt hier in Hannover
+um 12.36 Uhr an. Ich bin ab 12.15 Uhr im Hauptbahnhof
+und warte auf dich vor der Auskunft.
+Du kannst mich den ganzen Vormittag auf meinem Handy
+(++49 173 62 205 59) erreichen.
+Deine
+Karin</div>
+
+<div class="question">
+<div class="questionTitle">1 Lis Zug kommt nach halb eins an.</div>
+<label class="option"><input type="radio" name="l1" value="+"> richtig (+)</label>
+<label class="option"><input type="radio" name="l1" value="-"> falsch (–)</label>
+</div>
+
+<div class="question">
+<div class="questionTitle">2 Karin wartet den ganzen Vormittag vor der Auskunft.</div>
+<label class="option"><input type="radio" name="l2" value="+"> richtig (+)</label>
+<label class="option"><input type="radio" name="l2" value="-"> falsch (–)</label>
+</div>
+
+<div class="readText">Liebe Carmen, lieber José,
+am kommenden Sonntag habe ich Geburtstag.
+Ich möchte gerne mit euch feiern und lade euch
+herzlich zu meiner Party am Samstagabend ein.
+Wir fangen um 21 Uhr an. Ist das okay für euch?
+Es werden eine ganze Menge Leute da sein, die ihr
+auch kennt. Könntet ihr vielleicht einen Salat mitbringen?
+Und vergesst bitte nicht einen Pullover oder eine Jacke!
+Wir wollen nämlich draußen im Garten feiern.
+Ich freue mich sehr auf euch!
+Bis zum Wochenende
+Ralf</div>
+
+<div class="question">
+<div class="questionTitle">3 Ralf hatte am letzten Wochenende Geburtstag.</div>
+<label class="option"><input type="radio" name="l3" value="+"> richtig (+)</label>
+<label class="option"><input type="radio" name="l3" value="-"> falsch (–)</label>
+</div>
+
+<div class="question">
+<div class="questionTitle">4 Ralf hat nur zwei oder drei Leute eingeladen.</div>
+<label class="option"><input type="radio" name="l4" value="+"> richtig (+)</label>
+<label class="option"><input type="radio" name="l4" value="-"> falsch (–)</label>
+</div>
+
+<div class="question">
+<div class="questionTitle">5 Die Party findet draußen statt.</div>
+<label class="option"><input type="radio" name="l5" value="+"> richtig (+)</label>
+<label class="option"><input type="radio" name="l5" value="-"> falsch (–)</label>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>Lesen, Teil 2</h2>
+
+<p class="muted">
+Lesen Sie die Texte und die Aufgaben 6–10.<br>
+Welche Anzeige ist interessant für Sie?<br>
+Kreuzen Sie an: a oder b?
+</p>
+
+<div class="question">
+<div class="questionTitle">
+6 Sie möchten mit dem Schiff auf dem Rhein fahren. Wo bekommen Sie Informationen?
+</div>
+
+<div class="adBox">
+<div class="ad">
+<strong>www.schiff-ruedesheim.de</strong><br><br>
+Hotel – Pension – Schiff<br>
+Einzel- und Doppelzimmer<br>
+mit Dusche/WC<br>
+Restaurant mit Rhein-Terrasse<br>
+Preise über uns Buchung
+</div>
+
+<div class="ad">
+<strong>www.bingen-ruedesheimer.de</strong><br><br>
+Bingen-Rüdesheimer Rheinschiffe<br>
+täglich von Rüdesheim nach Koblenz<br>
+alle Abfahrtszeiten und Preise<br>
+hier
+</div>
+</div>
+
+<label class="option"><input type="radio" name="l6" value="a"> a&nbsp; www.schiff-ruedesheim.de</label>
+<label class="option"><input type="radio" name="l6" value="b"> b&nbsp; www.bingen-ruedesheimer.de</label>
+</div>
+
+
+<div class="question">
+<div class="questionTitle">
+7 Sie möchten Deutsch in Deutschland lernen. Wo finden Sie Informationen?
+</div>
+
+<div class="adBox">
+<div class="ad">
+<strong>www.sprachenfuchs.de</strong><br><br>
+Sprachinstitut Fuchs<br>
+Dresden, Prager Str. 4<br>
+– Deutsch – Englisch<br>
+– Französisch – Russisch<br>
+&gt; Die Schule &gt; Die Preise<br>
+&gt; Die Kurse &gt; Kontakt
+</div>
+
+<div class="ad">
+<strong>www.eviva.com</strong><br><br>
+Eviva-Idiomas<br>
+Sprachkurse für Deutsche<br>
+Spanisch auf Mallorca, Englisch auf Malta<br>
+• Unsere Preise<br>
+• Unser Unterricht<br>
+• Buchungen
+</div>
+</div>
+
+<label class="option"><input type="radio" name="l7" value="a"> a&nbsp; www.sprachenfuchs.de</label>
+<label class="option"><input type="radio" name="l7" value="b"> b&nbsp; www.eviva.com</label>
+</div>
+
+
+<div class="question">
+<div class="questionTitle">
+8 Sie möchten ein Zugticket im Internet kaufen. Wo können Sie das?
+</div>
+
+<div class="adBox">
+<div class="ad">
+<strong>www.DER.com</strong><br><br>
+Deutsches Reisebüro<br>
+Ticketbestellungen und Reservierungen<br>
+für Flüge weltweit, Deutsche Bahn,<br>
+Eurobus, 24-Stunden-Service<br>
+E-Mail Ticketbestellung
+</div>
+
+<div class="ad">
+<strong>www.RED.com</strong><br><br>
+Reisedienst GmbH<br>
+Ticketservice für Theater, Konzerte,<br>
+Busreisen in Deutschland und nach<br>
+Polen, Tschechien und Ungarn<br>
+Konzertservice Theater Busreisen
+</div>
+</div>
+
+<label class="option"><input type="radio" name="l8" value="a"> a&nbsp; www.DER.com</label>
+<label class="option"><input type="radio" name="l8" value="b"> b&nbsp; www.RED.com</label>
+</div>
+
+
+<div class="question">
+<div class="questionTitle">
+9 Sie möchten Informationen über den Bodensee. Wo finden Sie das?
+</div>
+
+<div class="adBox">
+<div class="ad">
+<strong>www.bodensee.de</strong><br><br>
+Touristeninformation<br>
+Urlaubsorte<br>
+Hotelservice<br>
+Ferienwohnungen<br>
+Rundreisen
+</div>
+
+<div class="ad">
+<strong>www.rottenmeier.de</strong><br><br>
+Hans Rottenmeier<br>
+Ferienwohnungen am Bodensee<br>
+Häuser<br>
+Preise<br>
+Kontakte
+</div>
+</div>
+
+<label class="option"><input type="radio" name="l9" value="a"> a&nbsp; www.bodensee.de</label>
+<label class="option"><input type="radio" name="l9" value="b"> b&nbsp; www.rottenmeier.de</label>
+</div>
+
+
+<div class="question">
+<div class="questionTitle">
+10 Sie sind in Wiesbaden und möchten mit dem Zug am Mittag in Hamburg sein. Wo finden Sie den richtigen Zug, bei Information a oder b?
+</div>
+
+<div class="adBox">
+<div class="ad">
+<strong>a</strong><br><br>
+Bahnhof Datum Zeit Dauer Umsteigen<br>
+Angebot<br>
+ab Wiesbaden 17.02. 07:34 4:31 1 S, ICE<br>
+an Hamburg 17.02. 12:05
+</div>
+
+<div class="ad">
+<strong>b</strong><br><br>
+Bahnhof Datum Zeit Dauer Umsteigen<br>
+Angebot<br>
+ab Hamburg 17.02. 12:18 4:34 1 ICE, S<br>
+an Wiesbaden 17.02. 16:52
+</div>
+</div>
+
+<label class="option"><input type="radio" name="l10" value="a"> a</label>
+<label class="option"><input type="radio" name="l10" value="b"> b</label>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>Lesen, Teil 3</h2>
+
+<p class="muted">
+Lesen Sie die Texte und die Aufgaben 11–15.<br>
+Kreuzen Sie an: Richtig (+) oder falsch (–)?
+</p>
+
+<div class="question">
+<div class="readText"><strong>An der Post</strong>
+
+montags–freitags
+8.00–12.00 Uhr und 13.00–18.00 Uhr
+samstags
+8.00–12.00 Uhr
+
+Öffnungszeiten:
+
+Es ist Samstagnachmittag. Sie können auf der Post Briefmarken kaufen.</div>
+
+<div class="questionTitle">11</div>
+<label class="option"><input type="radio" name="l11" value="+"> richtig (+)</label>
+<label class="option"><input type="radio" name="l11" value="-"> falsch (–)</label>
+</div>
+
+
+<div class="question">
+<div class="readText"><strong>In der Sprachschule</strong>
+
+In der 10-Uhr-Pause bekommen Sie an der Rezeption ein Frühstückspaket: belegte Brötchen und Getränke für 2 Euro.
+
+In der Sprachschule können Sie etwas zu essen kaufen.</div>
+
+<div class="questionTitle">12</div>
+<label class="option"><input type="radio" name="l12" value="+"> richtig (+)</label>
+<label class="option"><input type="radio" name="l12" value="-"> falsch (–)</label>
+</div>
+
+
+<div class="question">
+<div class="readText"><strong>Am Bahnhof</strong>
+
+Auf dem gesamten Bahnhof ist das Rauchen verboten.
+
+Sie können hier Zigaretten rauchen.</div>
+
+<div class="questionTitle">13</div>
+<label class="option"><input type="radio" name="l13" value="+"> richtig (+)</label>
+<label class="option"><input type="radio" name="l13" value="-"> falsch (–)</label>
+</div>
+
+
+<div class="question">
+<div class="readText"><strong>Am Eingang des Restaurants</strong>
+
+Heute im Bavaria:
+Bayerischer Abend
+Brezeln, Weißwürste, Sauerkraut
+Volksmusik, ab 20 Uhr Tanz
+
+Heute Abend können Sie in diesem Restaurant tanzen.</div>
+
+<div class="questionTitle">14</div>
+<label class="option"><input type="radio" name="l14" value="+"> richtig (+)</label>
+<label class="option"><input type="radio" name="l14" value="-"> falsch (–)</label>
+</div>
+
+
+<div class="question">
+<div class="readText"><strong>An der Haltestelle</strong>
+
+In der Neujahrsnacht
+Busverkehr bis 23.00 Uhr
+und
+von 1.00 Uhr bis 5.00 Uhr
+alle 30 Minuten
+
+Von 23 Uhr bis 1 Uhr fährt kein Bus.</div>
+
+<div class="questionTitle">15</div>
+<label class="option"><input type="radio" name="l15" value="+"> richtig (+)</label>
+<label class="option"><input type="radio" name="l15" value="-"> falsch (–)</label>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ================= SCHREIBEN ================= -->
+<div id="schreiben" class="section">
+
+<div class="card">
+
+<h2>Schreiben</h2>
+
+<p class="muted">
+20 Minuten Schreiben
+</p>
+
+<p style="margin-top:12px">
+Dieser Test hat zwei Teile.<br>
+Sie füllen ein Formular aus und schreiben eine kurze Mitteilung.<br>
+Übertragen Sie zum Schluss Ihre Lösungen auf den Antwortbogen.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>Schreiben, Teil 1</h2>
+
+<p>
+Ihre Freundin, Eva Kadavy, macht mit ihrem Mann und ihren beiden Söhnen (8 und 11 Jahre alt) Urlaub in Seeheim.
+Im Reisebüro bucht sie für den nächsten Sonntag eine Busfahrt um den Bodensee.
+Frau Kadavy hat keine Kreditkarte.
+Schreiben Sie die fünf fehlenden Informationen in das Formular.
+Am Ende übertragen Sie Ihre Lösungen bitte auf den Antwortbogen.
+</p>
+
+<div class="formBox">
+
+<h2 style="text-align:center">BODENSEE-RUNDFAHRT</h2>
+<h3 style="text-align:center">Anmeldung</h3>
+
+<div class="formGrid">
+
+<div>
+<label>Familienname, Vorname:</label>
+<input value="Eva Kadavy" readonly>
+</div>
+
+<div>
+<label>Anzahl der Personen:</label>
+<input id="w1" type="text">
+</div>
+
+<div>
+<label>Davon Kinder:</label>
+<input id="w2" type="text">
+</div>
+
+<div>
+<label>Urlaubsadresse:</label>
+<input value="Hotel Schönblick" readonly>
+</div>
+
+<div>
+<label>Straße, Hausnummer:</label>
+<input value="Burgstraße 34" readonly>
+</div>
+
+<div>
+<label>PLZ, Urlaubsort:</label>
+<input id="w3" type="text">
+</div>
+
+</div>
+
+<p style="margin-top:15px">
+Der Reisepreis ist mit der Anmeldung zu bezahlen.
+</p>
+
+<div class="formGrid">
+
+<div>
+<label>Zahlungsweise:</label>
+<select id="w4">
+<option value="">Bitte wählen</option>
+<option value="bar">Bar</option>
+<option value="kreditkarte">Kreditkarte</option>
+</select>
+</div>
+
+<div>
+<label>Reisetermin:</label>
+<input id="w5" type="text">
+</div>
+
+</div>
+
+<div style="margin-top:15px">
+<label>Unterschrift</label>
+<input type="text" placeholder="Name / signature">
 </div>
 
 </div>
@@ -880,145 +1083,176 @@ placeholder="Ihre Antwort"
 
 <div class="card">
 
-<h2>Schreiben – Teil 2</h2>
+<h2>Schreiben, Teil 2</h2>
 
 <p>
 Schreiben Sie an die Touristeninformation in Dresden:
 </p>
 
-<ul>
-<li>Sie kommen im August nach Dresden.</li>
-<li>Bitten Sie um Informationen über Film, Theater, Museen usw. (Kulturprogramm).</li>
-<li>Bitten Sie um Hoteladressen.</li>
-</ul>
-
-<p>
-Schreiben Sie zu jedem Punkt ein bis zwei Sätze
-(circa 30 Wörter). Vergessen Sie nicht den passenden
-Anfang und Gruß am Schluss.
+<p style="margin-top:10px">
+• Sie kommen im August nach Dresden.<br>
+• Bitten Sie um Informationen über Film, Theater, Museen usw. (Kulturprogramm).<br>
+• Bitten Sie um Hoteladressen.
 </p>
 
-<textarea
-id="writingAnswer"
-placeholder="Schreiben Sie hier Ihre Nachricht auf Deutsch..."
-oninput="updateWordCount()"
-></textarea>
+<p style="margin-top:12px">
+Schreiben Sie zu jedem Punkt ein bis zwei Sätze (circa 30 Wörter) auf den Antwortbogen.
+Vergessen Sie nicht den passenden Anfang und Gruß am Schluss.
+</p>
 
-<div class="wordcount">
-Wörter:
-<span id="wordCount">0</span>
+<div class="notice">
+Bitte schreiben Sie Ihren Text selbst. Der Text wird anhand der sichtbaren Aufgabenpunkte ausgewertet.
 </div>
+
+<div class="writeToolbar">
+
+<button class="toolBtn" onclick="insertChar('ä')">ä</button>
+<button class="toolBtn" onclick="insertChar('ö')">ö</button>
+<button class="toolBtn" onclick="insertChar('ü')">ü</button>
+<button class="toolBtn" onclick="insertChar('ß')">ß</button>
+<button class="toolBtn" onclick="insertChar('Ä')">Ä</button>
+<button class="toolBtn" onclick="insertChar('Ö')">Ö</button>
+<button class="toolBtn" onclick="insertChar('Ü')">Ü</button>
+
+<button class="toolBtn" onclick="upperText()">ABC</button>
+<button class="toolBtn" onclick="lowerText()">abc</button>
+
+</div>
+
+<textarea id="writing2"
+placeholder="Ihre Antwort hier schreiben..."></textarea>
+
+</div>
+
+</div>
+
+
+<div class="card" style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap">
+
+<button class="btn secondary" onclick="showTab('hoeren',document.querySelector('.tab'))">
+Zurück zu Hören
+</button>
+
+<button class="btn primary" onclick="submitTest()">
+TEST ABGEBEN & AUSWERTEN
+</button>
 
 </div>
 
 </section>
 
 
-<div class="submit-wrap">
+<!-- RESULT -->
+<section id="resultScreen" class="result">
 
-<button
-class="submit"
-onclick="submitExam(false)"
->
-✅ TEST ABSENDEN & ERGEBNIS ANZEIGEN
+<div class="card">
+
+<div class="resultHeader">
+
+<div class="badge">DEUTSCH MIT JITU · A1</div>
+
+<h1 style="margin-top:15px">
+A1 TEST RESULT
+</h1>
+
+<h2 id="resultName"></h2>
+
+<div class="scoreBig">
+<span id="totalScore">0</span><small style="font-size:24px"> / 40</small>
+</div>
+
+<p id="percentage"></p>
+
+<p id="expression" class="gold" style="font-size:18px;margin-top:15px"></p>
+
+</div>
+
+
+<table class="scoreTable">
+
+<thead>
+<tr>
+<th>Section</th>
+<th>Score</th>
+<th>Maximum</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Hören</td>
+<td id="scoreH"></td>
+<td>15</td>
+</tr>
+
+<tr>
+<td>Lesen</td>
+<td id="scoreL"></td>
+<td>15</td>
+</tr>
+
+<tr>
+<td>Schreiben Teil 1</td>
+<td id="scoreW1"></td>
+<td>5</td>
+</tr>
+
+<tr>
+<td>Schreiben Teil 2</td>
+<td id="scoreW2"></td>
+<td>5</td>
+</tr>
+
+<tr>
+<td><strong>Gesamt</strong></td>
+<td><strong id="scoreTotalTable"></strong></td>
+<td><strong>40</strong></td>
+</tr>
+
+</tbody>
+</table>
+
+
+<h3>Result Progress</h3>
+
+<div class="progress">
+<div id="resultProgress"></div>
+</div>
+
+
+<div class="card" style="margin-top:20px;background:#0a0d12">
+
+<h3>Writing Evaluation</h3>
+
+<div id="writingEvaluation"></div>
+
+</div>
+
+
+<div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:25px">
+
+<button class="btn primary" onclick="downloadPDF()">
+DOWNLOAD RESULT PDF
 </button>
-
-</div>
-
-</main>
-
-
-<!-- ================= RESULT ================= -->
-
-<section class="container" id="result">
-
-<div class="result-main">
-
-<div class="result-name">
-Candidate:
-<strong id="resultName">—</strong>
-</div>
-
-<h1>🎉 Prüfung ausgewertet</h1>
-
-<div class="total-score" id="totalScore">
-0 / 45
-</div>
-
-<div class="percent" id="percentage">
-0%
-</div>
-
-<p id="resultStatus"></p>
 
 <a
-class="website-btn"
 href="https://deutschmitjitu.in/"
 target="_blank"
-rel="noopener noreferrer"
->
-🌐 Visit Deutsch mit Jitu
+class="btn secondary"
+style="text-decoration:none">
+VISIT DEUTSCHMITJITU.IN
 </a>
 
-<button
-class="pdf-btn"
-onclick="downloadAnswerPDF()"
->
-📄 Download Answer PDF
-</button>
-
 </div>
 
-
-<div class="score-grid">
-
-<div class="score-box">
-Hören
-<strong id="listeningScore">0 / 15</strong>
+<div class="footer">
+Deutsch mit Jitu · A Dahiya Global Company<br>
+Founded by Jatin Dahiya
 </div>
-
-<div class="score-box">
-Lesen
-<strong id="readingScore">0 / 15</strong>
-</div>
-
-<div class="score-box">
-Schreiben
-<strong id="writingScore">0 / 15</strong>
-</div>
-
-</div>
-
-
-<div class="eval">
-
-<h2>🤖 Automatic / AI-Ready Evaluation</h2>
-
-<div id="evaluationText"></div>
 
 </div>
 
 </section>
-
-
-<!-- ================= LOCK ================= -->
-
-<div class="locked" id="lockScreen">
-
-<div class="lock-box">
-
-<h1>⚠️ EXAM LOCKED</h1>
-
-<p id="lockReason">
-Exam security violation detected.
-</p>
-
-<p>
-This examination is permanently locked on this browser/device.
-You cannot start the examination again on this device.
-</p>
-
-</div>
 
 </div>
 
@@ -1026,66 +1260,522 @@ You cannot start the examination again on this device.
 <script>
 
 /* =========================================================
-   CONSTANTS
+   ANSWER KEY — VERIFIED FROM THE PROVIDED TELC PDF
 ========================================================= */
 
-const TOTAL_SECONDS = 70 * 60;
+const ANSWERS = {
 
-const DEVICE_LOCK_KEY =
-    "deutschMitJitu_telcA1_permanent_lock_v4";
+  h1:"c",
+  h2:"b",
+  h3:"a",
+  h4:"b",
+  h5:"a",
+  h6:"c",
+  h7:"-",
+  h8:"-",
+  h9:"+",
+  h10:"+",
+  h11:"a",
+  h12:"c",
+  h13:"c",
+  h14:"b",
+  h15:"b",
 
-const EXAM_ACTIVE_KEY =
-    "deutschMitJitu_telcA1_exam_active_v4";
-
-let studentName = "";
-let examStarted = false;
-let submitted = false;
-let secondsLeft = TOTAL_SECONDS;
-let timerInterval = null;
-let listeningStarted = false;
-
-let finalExamData = null;
+  l1:"+",
+  l2:"-",
+  l3:"-",
+  l4:"-",
+  l5:"+",
+  l6:"b",
+  l7:"a",
+  l8:"a",
+  l9:"a",
+  l10:"b",
+  l11:"+",
+  l12:"-",
+  l13:"-",
+  l14:"+",
+  l15:"+"
+};
 
 
 /* =========================================================
-   DEVICE LOCK
+   TEST STATE
 ========================================================= */
 
-function isDeviceLocked(){
+let student = "";
+let timerSeconds = 70 * 60;
+let timerInterval = null;
+let submitted = false;
 
-    return localStorage.getItem(
-        DEVICE_LOCK_KEY
-    ) === "LOCKED";
+
+/* =========================================================
+   START
+========================================================= */
+
+function startTest(){
+
+  const name = document.getElementById("studentName").value.trim();
+
+  if(!name){
+    alert("Bitte geben Sie Ihren Namen ein.");
+    return;
+  }
+
+  student = name;
+
+  document.getElementById("startScreen").classList.add("hidden");
+  document.getElementById("testScreen").classList.remove("hidden");
+  document.getElementById("timer").classList.remove("hidden");
+
+  startTimer();
 
 }
 
 
-function permanentlyLockDevice(reason){
+/* =========================================================
+   TAB SWITCH
+========================================================= */
 
-    localStorage.setItem(
-        DEVICE_LOCK_KEY,
-        "LOCKED"
+function showTab(id,button){
+
+  document.querySelectorAll(".section").forEach(section=>{
+    section.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll(".tab").forEach(tab=>{
+    tab.classList.remove("active");
+  });
+
+  if(button){
+    button.classList.add("active");
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+
+/* =========================================================
+   TIMER
+========================================================= */
+
+function startTimer(){
+
+  updateTimer();
+
+  timerInterval=setInterval(()=>{
+
+    timerSeconds--;
+
+    updateTimer();
+
+    if(timerSeconds<=0){
+
+      clearInterval(timerInterval);
+
+      alert("Die Prüfungszeit ist abgelaufen.");
+
+      submitTest();
+
+    }
+
+  },1000);
+}
+
+
+function updateTimer(){
+
+  let min=Math.floor(timerSeconds/60);
+  let sec=timerSeconds%60;
+
+  document.getElementById("timer").textContent =
+    String(min).padStart(2,"0")+":"+
+    String(sec).padStart(2,"0");
+
+  if(timerSeconds<=300){
+    document.getElementById("timer").classList.add("warning");
+  }
+}
+
+
+/* =========================================================
+   RADIO ANSWER
+========================================================= */
+
+function getAnswer(name){
+
+  const selected=document.querySelector(
+    'input[name="'+name+'"]:checked'
+  );
+
+  return selected ? selected.value : null;
+}
+
+
+/* =========================================================
+   OBJECTIVE SCORE
+========================================================= */
+
+function scoreObjective(prefix,count){
+
+  let score=0;
+
+  for(let i=1;i<=count;i++){
+
+    const answer=getAnswer(prefix+i);
+
+    if(answer===ANSWERS[prefix+i]){
+      score++;
+    }
+
+  }
+
+  return score;
+}
+
+
+/* =========================================================
+   WRITING PART 1
+   PDF KEY:
+   1 = 4 Personen
+   2 = 2 Kinder
+   3 = Seeheim
+   4 = Bar
+   5 = nächster Sonntag / Sonntag
+========================================================= */
+
+function scoreWritingPart1(){
+
+  let score=0;
+
+  const a1=document.getElementById("w1").value.trim().toLowerCase();
+  const a2=document.getElementById("w2").value.trim().toLowerCase();
+  const a3=document.getElementById("w3").value.trim().toLowerCase();
+  const a4=document.getElementById("w4").value.trim().toLowerCase();
+  const a5=document.getElementById("w5").value.trim().toLowerCase();
+
+  if(
+    a1==="4" ||
+    a1==="4 personen" ||
+    a1==="vier"
+  ){
+    score++;
+  }
+
+  if(
+    a2==="2" ||
+    a2==="2 kinder" ||
+    a2==="zwei"
+  ){
+    score++;
+  }
+
+  if(a3==="seeheim"){
+    score++;
+  }
+
+  if(a4==="bar"){
+    score++;
+  }
+
+  if(
+    a5.includes("sonntag")
+  ){
+    score++;
+  }
+
+  return score;
+}
+
+
+/* =========================================================
+   WRITING PART 2
+   PRACTICE RUBRIC
+   5 POINTS:
+   August + Kulturprogramm + Hoteladressen +
+   appropriate beginning + greeting
+========================================================= */
+
+function scoreWritingPart2(){
+
+  const text=document
+    .getElementById("writing2")
+    .value
+    .trim();
+
+  const normalized=text.toLowerCase();
+
+  let points=[];
+
+  /* Point 1 */
+  const august =
+    normalized.includes("august");
+
+  points.push({
+    title:"Sie kommen im August nach Dresden.",
+    ok:august
+  });
+
+
+  /* Point 2 */
+  const culture =
+    normalized.includes("film") ||
+    normalized.includes("theater") ||
+    normalized.includes("museum") ||
+    normalized.includes("kulturprogramm");
+
+  points.push({
+    title:"Informationen über Film, Theater, Museen usw. (Kulturprogramm).",
+    ok:culture
+  });
+
+
+  /* Point 3 */
+  const hotel =
+    normalized.includes("hotel") ||
+    normalized.includes("übernacht");
+
+  points.push({
+    title:"Hoteladressen",
+    ok:hotel
+  });
+
+
+  /* Beginning */
+  const beginning =
+    normalized.startsWith("sehr geehrte") ||
+    normalized.startsWith("liebe") ||
+    normalized.startsWith("hallo");
+
+  points.push({
+    title:"Passender Anfang",
+    ok:beginning
+  });
+
+
+  /* Closing */
+  const closing =
+    normalized.includes("mit freundlichen grüßen") ||
+    normalized.includes("freundlichen grüßen") ||
+    normalized.includes("viele grüße") ||
+    normalized.includes("liebe grüße");
+
+  points.push({
+    title:"Gruß am Schluss",
+    ok:closing
+  });
+
+
+  let score=points.filter(x=>x.ok).length;
+
+  return {
+    score:score,
+    points:points,
+    text:text
+  };
+}
+
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+function submitTest(){
+
+  if(submitted) return;
+
+  if(!student){
+    alert("Bitte starten Sie den Test zuerst.");
+    return;
+  }
+
+  const confirmSubmit =
+    timerSeconds<=0 ||
+    confirm("Möchten Sie den Test wirklich abgeben?");
+
+  if(!confirmSubmit){
+    return;
+  }
+
+  submitted=true;
+
+  clearInterval(timerInterval);
+
+  document.getElementById("audioPlayer").pause();
+
+  const hScore=scoreObjective("h",15);
+  const lScore=scoreObjective("l",15);
+
+  const w1Score=scoreWritingPart1();
+  const w2=scoreWritingPart2();
+
+  const total=hScore+lScore+w1Score+w2.score;
+  const percentage=(total/40)*100;
+
+  document.getElementById("testScreen").classList.add("hidden");
+
+  document.getElementById("resultScreen").style.display="block";
+
+  document.getElementById("resultName").textContent=student;
+
+  document.getElementById("totalScore").textContent=total;
+
+  document.getElementById("percentage").textContent=
+    percentage.toFixed(2)+"%";
+
+  document.getElementById("scoreH").textContent=hScore;
+  document.getElementById("scoreL").textContent=lScore;
+  document.getElementById("scoreW1").textContent=w1Score;
+  document.getElementById("scoreW2").textContent=w2.score;
+
+  document.getElementById("scoreTotalTable").textContent=
+    total+" / 40";
+
+  document.getElementById("resultProgress").style.width=
+    percentage+"%";
+
+
+  const expressions=[
+    "🌟 Sehr gut! Weiter so!",
+    "💪 Stark gemacht!",
+    "🇩🇪 Schritt für Schritt zum Deutsch-Profi!",
+    "🔥 Gute Arbeit!",
+    "✨ Weiterlernen lohnt sich!",
+    "👏 Respekt für deine Arbeit!",
+    "🚀 Dein Deutsch entwickelt sich weiter!"
+  ];
+
+  document.getElementById("expression").textContent=
+    expressions[Math.floor(Math.random()*expressions.length)];
+
+
+  let html="";
+
+  w2.points.forEach((p,index)=>{
+
+    html+=`
+      <div style="
+        padding:10px 0;
+        border-bottom:1px solid #292e38;
+      ">
+        <strong>${index+1}. ${escapeHTML(p.title)}</strong>
+        <span style="
+          float:right;
+          color:${p.ok ? '#67d48a':'#ff7070'};
+          font-weight:800;
+        ">
+          ${p.ok ? "1 / 1":"0 / 1"}
+        </span>
+      </div>
+    `;
+
+  });
+
+  html+=`
+    <div style="margin-top:15px">
+      <strong>Schreiben Teil 2: ${w2.score} / 5</strong>
+    </div>
+  `;
+
+  document.getElementById("writingEvaluation").innerHTML=html;
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================================================
+   WRITING TOOLBAR
+========================================================= */
+
+let activeWriting=document.getElementById("writing2");
+
+document.addEventListener("focusin",function(e){
+
+  if(e.target.id==="writing2"){
+    activeWriting=e.target;
+  }
+
+});
+
+
+function insertChar(char){
+
+  const textarea=activeWriting;
+
+  const start=textarea.selectionStart;
+  const end=textarea.selectionEnd;
+
+  textarea.value=
+    textarea.value.substring(0,start)+
+    char+
+    textarea.value.substring(end);
+
+  textarea.focus();
+
+  textarea.selectionStart=
+  textarea.selectionEnd=
+    start+char.length;
+}
+
+
+function upperText(){
+
+  const textarea=activeWriting;
+
+  const start=textarea.selectionStart;
+  const end=textarea.selectionEnd;
+
+  if(start!==end){
+
+    textarea.setRangeText(
+      textarea.value.substring(start,end).toUpperCase(),
+      start,
+      end,
+      "end"
     );
 
-    localStorage.setItem(
-        EXAM_ACTIVE_KEY,
-        "LOCKED"
+  }else{
+
+    textarea.value=textarea.value.toUpperCase();
+
+  }
+
+  textarea.focus();
+}
+
+
+function lowerText(){
+
+  const textarea=activeWriting;
+
+  const start=textarea.selectionStart;
+  const end=textarea.selectionEnd;
+
+  if(start!==end){
+
+    textarea.setRangeText(
+      textarea.value.substring(start,end).toLowerCase(),
+      start,
+      end,
+      "end"
     );
 
-    examStarted=false;
+  }else{
 
-    try{
-        document.getElementById("telcAudio").pause();
-    }catch(e){}
+    textarea.value=textarea.value.toLowerCase();
 
-    document.getElementById(
-        "lockReason"
-    ).textContent=reason;
+  }
 
-    document.getElementById(
-        "lockScreen"
-    ).classList.add("show");
-
+  textarea.focus();
 }
 
 
@@ -1093,9 +1783,9 @@ function permanentlyLockDevice(reason){
    ESCAPE
 ========================================================= */
 
-function escapeHTML(value){
+function escapeHTML(str){
 
-    return String(value)
+  return String(str)
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
@@ -1106,2420 +1796,282 @@ function escapeHTML(value){
 
 
 /* =========================================================
-   READING DATA FROM TELC PDF
+   PROFESSIONAL RESULT PDF
 ========================================================= */
 
-const readingPart1 = [
-
-{
-    number:1,
-    question:"Lis Zug kommt nach halb eins an.",
-    options:["Richtig","Falsch"],
-    correct:"Richtig"
-},
-
-{
-    number:2,
-    question:"Karin wartet den ganzen Vormittag vor der Auskunft.",
-    options:["Richtig","Falsch"],
-    correct:"Falsch"
-},
-
-{
-    number:3,
-    question:"Ralf hatte am letzten Wochenende Geburtstag.",
-    options:["Richtig","Falsch"],
-    correct:"Falsch"
-},
-
-{
-    number:4,
-    question:"Ralf hat nur zwei oder drei Leute eingeladen.",
-    options:["Richtig","Falsch"],
-    correct:"Falsch"
-},
-
-{
-    number:5,
-    question:"Die Party findet draußen statt.",
-    options:["Richtig","Falsch"],
-    correct:"Richtig"
-}
-
-];
-
-
-const readingPart2 = [
-
-{
-    number:6,
-    situation:"Sie möchten mit dem Schiff auf dem Rhein fahren. Wo bekommen Sie Informationen?",
-    a:{
-        title:"www.schiff-ruedesheim.de",
-        text:"Hotel – Pension – Schiff. Einzel- und Doppelzimmer mit Dusche/WC. Restaurant mit Rhein-Terrasse. Preise über uns. Buchung."
-    },
-    b:{
-        title:"www.bingen-ruedesheimer.de",
-        text:"Bingen-Rüdesheimer Rheinschiffe. täglich von Rüdesheim nach Koblenz. alle Abfahrtszeiten und Preise hier."
-    },
-    correct:"b"
-},
-
-{
-    number:7,
-    situation:"Sie möchten Deutsch in Deutschland lernen. Wo finden Sie Informationen?",
-    a:{
-        title:"www.sprachenfuchs.de",
-        text:"Sprachinstitut Fuchs. Dresden, Prager Str. 4. Deutsch – Englisch – Französisch – Russisch. Die Schule. Die Preise. Die Kurse. Kontakt."
-    },
-    b:{
-        title:"www.eviva.com",
-        text:"Eviva-Idiomas. Sprachkurse für Deutsche. Spanisch auf Mallorca, Englisch auf Malta. Unsere Preise. Unser Unterricht. Buchungen."
-    },
-    correct:"a"
-},
-
-{
-    number:8,
-    situation:"Sie möchten ein Zugticket im Internet kaufen. Wo können Sie das?",
-    a:{
-        title:"www.DER.com",
-        text:"Deutsches Reisebüro. Ticketbestellungen und Reservierungen für Flüge weltweit, Deutsche Bahn, Eurobus. 24-Stunden-Service. E-Mail Ticketbestellung."
-    },
-    b:{
-        title:"www.RED.com",
-        text:"Reisedienst GmbH. Ticketservice für Theater, Konzerte, Busreisen in Deutschland und nach Polen, Tschechien und Ungarn."
-    },
-    correct:"a"
-},
-
-{
-    number:9,
-    situation:"Sie möchten Informationen über den Bodensee. Wo finden Sie das?",
-    a:{
-        title:"www.bodensee.de",
-        text:"Touristeninformation. Urlaubsorte. Hotelservice. Ferienwohnungen. Rundreisen."
-    },
-    b:{
-        title:"www.rottenmeier.de",
-        text:"Hans Rottenmeier. Ferienwohnungen am Bodensee. Häuser. Preise. Kontakte."
-    },
-    correct:"a"
-},
-
-{
-    number:10,
-    situation:"Sie sind in Wiesbaden und möchten mit dem Zug am Mittag in Hamburg sein. Wo finden Sie den richtigen Zug?",
-    a:{
-        title:"www.reiseauskunft.bahn.de",
-        text:"ab Wiesbaden 17.02. 07:34 – an Hamburg 17.02. 12:05"
-    },
-    b:{
-        title:"www.reiseauskunft.bahn.de",
-        text:"ab Hamburg 17.02. 12:18 – an Wiesbaden 17.02. 16:52"
-    },
-    correct:"a"
-}
-
-];
-
-
-const readingPart3 = [
-
-{
-    number:11,
-    title:"In der Sprachschule",
-    text:"In der 10-Uhr-Pause bekommen Sie an der Rezeption ein Frühstückspaket: belegte Brötchen und Getränke für 2 Euro.",
-    question:"In der Sprachschule können Sie etwas zu essen kaufen.",
-    correct:"Richtig"
-},
-
-{
-    number:12,
-    title:"An der Post",
-    text:"Öffnungszeiten: montags–freitags 8.00–12.00 Uhr und 13.00–18.00 Uhr. samstags 8.00–12.00 Uhr.",
-    question:"Es ist Samstagnachmittag. Sie können auf der Post Briefmarken kaufen.",
-    correct:"Falsch"
-},
-
-{
-    number:13,
-    title:"Am Bahnhof",
-    text:"Auf dem gesamten Bahnhof ist das Rauchen verboten.",
-    question:"Sie können hier Zigaretten rauchen.",
-    correct:"Falsch"
-},
-
-{
-    number:14,
-    title:"Am Eingang des Restaurants",
-    text:"Heute im Bavaria: Bayerischer Abend. Brezeln, Weißwürste, Sauerkraut. Volksmusik, ab 20 Uhr Tanz.",
-    question:"Heute Abend können Sie in diesem Restaurant tanzen.",
-    correct:"Richtig"
-},
-
-{
-    number:15,
-    title:"An der Haltestelle",
-    text:"In der Neujahrsnacht: Busverkehr bis 23.00 Uhr und von 1.00 Uhr bis 5.00 Uhr alle 30 Minuten.",
-    question:"Von 23 Uhr bis 1 Uhr fährt kein Bus.",
-    correct:"Richtig"
-}
-
-];
-
-
-/* =========================================================
-   LISTENING DATA FROM TELC PDF
-========================================================= */
-
-const listeningPart1 = [
-
-{
-    number:1,
-    question:"Was kostet der Pullover?",
-    options:["30,00 €","95,00 €","19,95 €"],
-    correct:"19,95 €"
-},
-
-{
-    number:2,
-    question:"Wie spät ist es?",
-    options:["15.00 Uhr","Gleich 17.00 Uhr","16.30 Uhr"],
-    correct:"Gleich 17.00 Uhr"
-},
-
-{
-    number:3,
-    question:"Was isst die Frau im Restaurant?",
-    options:["Pommes","Fisch","Wurst"],
-    correct:"Pommes"
-},
-
-{
-    number:4,
-    question:"In welche Klasse geht Frau Hegers Sohn?",
-    options:["9b","3a","4a"],
-    correct:"3a"
-},
-
-{
-    number:5,
-    question:"Wie kommt die Frau in den 2. Stock?",
-    options:["Mit dem Aufzug","Auf der Treppe um die Ecke","Mit der Rolltreppe"],
-    correct:"Mit dem Aufzug"
-},
-
-{
-    number:6,
-    question:"Wohin fährt Herr Albers?",
-    options:["In Urlaub ans Meer","Zur Arbeit","Zur Familie"],
-    correct:"Zur Familie"
-}
-
-];
-
-
-const listeningPart2 = [
-
-{
-    number:7,
-    question:"Die Kunden sollen die Weihnachtsfeier besuchen.",
-    options:["Richtig","Falsch"],
-    correct:"Falsch"
-},
-
-{
-    number:8,
-    question:"Die Fahrgäste sollen sich im Restaurant treffen.",
-    options:["Richtig","Falsch"],
-    correct:"Falsch"
-},
-
-{
-    number:9,
-    question:"Die Fahrgäste sollen im Zug bleiben.",
-    options:["Richtig","Falsch"],
-    correct:"Richtig"
-},
-
-{
-    number:10,
-    question:"Der Herr soll sofort zum Schalter kommen.",
-    options:["Richtig","Falsch"],
-    correct:"Richtig"
-}
-
-];
-
-
-const listeningPart3 = [
-
-{
-    number:11,
-    question:"Die Nummer ist:",
-    options:["11833","11883","12833"],
-    correct:"11833"
-},
+async function downloadPDF(){
+
+  if(!window.jspdf){
+
+    alert(
+      "PDF library load nahi hui. Internet connection check karke dobara try karein."
+    );
+
+    return;
+  }
+
+  const {jsPDF}=window.jspdf;
+
+  const pdf=new jsPDF({
+    orientation:"portrait",
+    unit:"mm",
+    format:"a4"
+  });
+
+  const hScore=scoreObjective("h",15);
+  const lScore=scoreObjective("l",15);
+  const w1Score=scoreWritingPart1();
+  const w2=scoreWritingPart2();
+
+  const total=hScore+lScore+w1Score+w2.score;
+  const percentage=(total/40)*100;
+
+  const date=new Date();
+
+  const dateString=
+    String(date.getDate()).padStart(2,"0")+
+    "."+
+    String(date.getMonth()+1).padStart(2,"0")+
+    "."+
+    date.getFullYear();
+
+  /* Background */
+  pdf.setFillColor(10,12,17);
+  pdf.rect(0,0,210,297,"F");
+
+  /* Header */
+  pdf.setFillColor(25,28,37);
+  pdf.roundedRect(12,12,186,38,5,5,"F");
 
-{
-    number:12,
-    question:"Wo genau treffen sich die Männer?",
-    options:["Am Zug","Am Bahnhof","An der Information"],
-    correct:"An der Information"
-},
+  pdf.setTextColor(255,255,255);
+  pdf.setFont("helvetica","bold");
+  pdf.setFontSize(22);
+  pdf.text("DEUTSCH MIT JITU",20,27);
 
-{
-    number:13,
-    question:"Wie lange will der Mann noch warten?",
-    options:["20 Minuten","2 Minuten","10 Minuten"],
-    correct:"10 Minuten"
-},
-
-{
-    number:14,
-    question:"An welchem Tag will die Frau kommen?",
-    options:["Am Montag","Am Sonntag","Am Samstag"],
-    correct:"Am Sonntag"
-},
-
-{
-    number:15,
-    question:"Was ist kaputt?",
-    options:["Der Fernseher","Der Computer","Das Handy"],
-    correct:"Der Computer"
-}
-
-];
-
-
-/* =========================================================
-   RENDER READING
-========================================================= */
-
-function renderReadingPart1(){
-
-    const box=
-        document.getElementById("readingPart1");
-
-    readingPart1.forEach(q=>{
+  pdf.setTextColor(217,164,65);
+  pdf.setFontSize(10);
+  pdf.text("A1 TEST RESULT",20,36);
 
-        const div=
-            document.createElement("div");
+  pdf.setTextColor(150,156,168);
+  pdf.setFontSize(8);
+  pdf.text(
+    "A Dahiya Global Company · Founded by Jatin Dahiya",
+    20,
+    44
+  );
 
-        div.className="question";
+  /* Student */
+  pdf.setTextColor(255,255,255);
+  pdf.setFontSize(13);
+  pdf.text("Student",20,66);
 
-        div.dataset.correct=q.correct;
+  pdf.setFont("helvetica","bold");
+  pdf.setTextColor(217,164,65);
+  pdf.text(student,20,75);
 
-        let html=`
+  pdf.setFont("helvetica","normal");
+  pdf.setTextColor(150,156,168);
+  pdf.setFontSize(9);
+  pdf.text("Test Date: "+dateString,20,83);
 
-        <div class="qtitle">
-            ${q.number}. ${escapeHTML(q.question)}
-        </div>
+  /* Big score */
+  pdf.setFillColor(25,28,37);
+  pdf.roundedRect(128,58,60,40,5,5,"F");
 
-        `;
+  pdf.setTextColor(217,164,65);
+  pdf.setFont("helvetica","bold");
+  pdf.setFontSize(27);
+  pdf.text(String(total),158,78,{align:"center"});
 
-        q.options.forEach(option=>{
+  pdf.setFontSize(9);
+  pdf.setTextColor(170,176,187);
+  pdf.text("/ 40",158,87,{align:"center"});
 
-            html+=`
+  /* Table */
+  let y=112;
 
-            <label class="option">
+  pdf.setFillColor(217,164,65);
+  pdf.roundedRect(20,y,168,10,2,2,"F");
 
-                <input
-                    type="radio"
-                    name="r${q.number}"
-                    value="${escapeHTML(option)}"
-                >
+  pdf.setTextColor(10,12,17);
+  pdf.setFont("helvetica","bold");
+  pdf.setFontSize(9);
 
-                ${escapeHTML(option)}
+  pdf.text("SECTION",25,y+6.5);
+  pdf.text("SCORE",120,y+6.5);
+  pdf.text("MAX",160,y+6.5);
 
-            </label>
+  const rows=[
+    ["Hören",hScore,15],
+    ["Lesen",lScore,15],
+    ["Schreiben Teil 1",w1Score,5],
+    ["Schreiben Teil 2",w2.score,5],
+    ["GESAMT",total,40]
+  ];
 
-            `;
+  y+=10;
 
-        });
+  rows.forEach((row,index)=>{
 
-        div.innerHTML=html;
-        box.appendChild(div);
+    if(index===4){
+      pdf.setFillColor(25,28,37);
+      pdf.rect(20,y,168,12,"F");
+    }
 
-    });
-
-}
+    pdf.setDrawColor(55,60,70);
+    pdf.line(20,y+12,188,y+12);
 
-
-function renderReadingPart2(){
+    pdf.setTextColor(255,255,255);
+    pdf.setFont(
+      "helvetica",
+      index===4 ? "bold" : "normal"
+    );
 
-    const box=
-        document.getElementById("readingPart2");
+    pdf.text(String(row[0]),25,y+8);
 
-    readingPart2.forEach(q=>{
+    pdf.setTextColor(
+      index===4 ? 217 : 255,
+      index===4 ? 164 : 255,
+      index===4 ? 65 : 255
+    );
 
-        const div=
-            document.createElement("div");
+    pdf.text(String(row[1]),120,y+8);
 
-        div.className="question";
-        div.dataset.correct=q.correct;
+    pdf.setTextColor(180,185,195);
+    pdf.text(String(row[2]),160,y+8);
 
-        div.innerHTML=`
+    y+=12;
 
-        <div class="qtitle">
-            ${q.number}. ${escapeHTML(q.situation)}
-        </div>
+  });
 
-        <div class="notice">
-            <b>a) ${escapeHTML(q.a.title)}</b><br>
-            ${escapeHTML(q.a.text)}
-        </div>
 
-        <div class="notice">
-            <b>b) ${escapeHTML(q.b.title)}</b><br>
-            ${escapeHTML(q.b.text)}
-        </div>
+  y+=12;
 
-        <label class="option">
-            <input
-                type="radio"
-                name="r${q.number}"
-                value="a"
-            >
-            a
-        </label>
+  pdf.setTextColor(255,255,255);
+  pdf.setFont("helvetica","bold");
+  pdf.setFontSize(11);
+  pdf.text(
+    "Percentage: "+percentage.toFixed(2)+"%",
+    20,
+    y
+  );
 
-        <label class="option">
-            <input
-                type="radio"
-                name="r${q.number}"
-                value="b"
-            >
-            b
-        </label>
+  y+=15;
 
-        `;
+  pdf.setTextColor(217,164,65);
+  pdf.text("Schreiben Teil 2 – Point-by-Point",20,y);
 
-        box.appendChild(div);
+  y+=8;
 
-    });
+  pdf.setFont("helvetica","normal");
+  pdf.setFontSize(8);
 
-}
+  w2.points.forEach((p,index)=>{
 
+    const mark=p.ok ? "1 / 1" : "0 / 1";
 
-function renderReadingPart3(){
+    pdf.setTextColor(230,230,235);
 
-    const box=
-        document.getElementById("readingPart3");
+    const lines=pdf.splitTextToSize(
+      (index+1)+". "+p.title,
+      125
+    );
 
-    readingPart3.forEach(q=>{
+    pdf.text(lines,20,y);
 
-        const div=
-            document.createElement("div");
+    pdf.setTextColor(
+      p.ok ? 103 : 255,
+      p.ok ? 212 : 112,
+      p.ok ? 138 : 112
+    );
 
-        div.className="question";
-        div.dataset.correct=q.correct;
+    pdf.text(
+      mark,
+      160,
+      y
+    );
 
-        div.innerHTML=`
+    y+=Math.max(7,lines.length*5);
 
-        <div class="notice">
-            <b>${q.number}. ${escapeHTML(q.title)}</b><br><br>
-            ${escapeHTML(q.text)}
-        </div>
+  });
 
-        <div class="qtitle">
-            ${escapeHTML(q.question)}
-        </div>
 
-        <label class="option">
-            <input
-                type="radio"
-                name="r${q.number}"
-                value="Richtig"
-            >
-            Richtig (+)
-        </label>
+  y+=8;
 
-        <label class="option">
-            <input
-                type="radio"
-                name="r${q.number}"
-                value="Falsch"
-            >
-            Falsch (–)
-        </label>
+  pdf.setTextColor(150,156,168);
+  pdf.setFontSize(7);
 
-        `;
+  const footer=[
+    "Deutsch mit Jitu",
+    "A Dahiya Global Company",
+    "https://deutschmitjitu.in/"
+  ];
 
-        box.appendChild(div);
+  pdf.text(footer[0],20,282);
+  pdf.text(footer[1],20,287);
+  pdf.text(footer[2],20,292);
 
-    });
+  pdf.setTextColor(100,105,115);
+  pdf.text(
+    "Practice test result · Automatically generated",
+    190,
+    292,
+    {align:"right"}
+  );
+
+  const safeName=student
+    .replace(/[^a-z0-9]+/gi,"_")
+    .replace(/^_+|_+$/g,"");
+
+  pdf.save(
+    "Deutsch_mit_Jitu_A1_Test_Result_"+safeName+".pdf"
+  );
 
 }
 
 
 /* =========================================================
-   RENDER LISTENING
+   PREVENT ACCIDENTAL PAGE REFRESH DURING TEST
 ========================================================= */
 
-function renderListening(){
+window.addEventListener("beforeunload",function(e){
 
-    renderListeningGroup(
-        "listeningPart1",
-        listeningPart1
-    );
+  if(
+    !document.getElementById("testScreen").classList.contains("hidden") &&
+    !submitted
+  ){
 
-    renderListeningGroup(
-        "listeningPart2",
-        listeningPart2
-    );
+    e.preventDefault();
+    e.returnValue="";
 
-    renderListeningGroup(
-        "listeningPart3",
-        listeningPart3
-    );
+  }
 
-}
-
-
-function renderListeningGroup(
-    containerId,
-    data
-){
-
-    const box=
-        document.getElementById(containerId);
-
-    data.forEach(q=>{
-
-        const div=
-            document.createElement("div");
-
-        div.className="question";
-        div.dataset.correct=q.correct;
-
-        let html=`
-
-        <div class="qtitle">
-            ${q.number}. ${escapeHTML(q.question)}
-        </div>
-
-        `;
-
-        q.options.forEach(option=>{
-
-            html+=`
-
-            <label class="option">
-
-                <input
-                    type="radio"
-                    name="l${q.number}"
-                    value="${escapeHTML(option)}"
-                >
-
-                ${escapeHTML(option)}
-
-            </label>
-
-            `;
-
-        });
-
-        div.innerHTML=html;
-        box.appendChild(div);
-
-    });
-
-}
+});
 
 
 /* =========================================================
-   AUDIO
+   STRICT VISIBILITY LOCK
 ========================================================= */
 
-function startListeningAudio(){
+document.addEventListener("visibilitychange",function(){
 
-    if(!examStarted)
-        return;
+  if(
+    document.hidden &&
+    !document.getElementById("testScreen").classList.contains("hidden") &&
+    !submitted
+  ){
 
-    if(listeningStarted)
-        return;
+    clearInterval(timerInterval);
 
-    const audio=
-        document.getElementById("telcAudio");
-
-    const button=
-        document.getElementById("audioStart");
-
-    const status=
-        document.getElementById("audioStatus");
-
-    listeningStarted=true;
-
-    audio.currentTime=0;
-
-    audio.controls=false;
-
-    button.disabled=true;
-    button.textContent="🔊 HÖREN LÄUFT...";
-
-    status.textContent=
-        "Die Hören-Aufnahme läuft. Bitte nicht verlassen oder neu laden.";
-
-    audio.play().catch(()=>{
-
-        listeningStarted=false;
-
-        button.disabled=false;
-        button.textContent="▶️ START HÖREN";
-
-        status.textContent=
-            "Bitte erneut auf START HÖREN klicken.";
-
-    });
-
-    audio.onended=()=>{
-
-        button.textContent="✓ HÖREN BEENDET";
-
-        status.textContent=
-            "Die Hören-Aufnahme ist beendet.";
-
-    };
-
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-function showSection(id,button){
-
-    document
-    .querySelectorAll(".section")
-    .forEach(x=>
-        x.classList.remove("active")
+    alert(
+      "Test locked because the test page was left."
     );
 
-    document
-    .querySelectorAll(".tab")
-    .forEach(x=>
-        x.classList.remove("active")
-    );
+    submitTest();
 
-    document
-    .getElementById(id)
-    .classList.add("active");
+  }
 
-    if(button)
-        button.classList.add("active");
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-}
-
-
-/* =========================================================
-   ANSWER
-========================================================= */
-
-function getAnswer(name){
-
-    const el=
-        document.querySelector(
-            `input[name="${name}"]:checked`
-        );
-
-    return el ? el.value : "";
-
-}
-
-
-/* =========================================================
-   READING SCORE
-========================================================= */
-
-function calculateReading(){
-
-    let correct=0;
-
-    for(let i=1;i<=15;i++){
-
-        const answer=
-            getAnswer("r"+i);
-
-        const question=
-            document.querySelector(
-                `.question:has(input[name="r${i}"])`
-            );
-
-        if(
-            question &&
-            answer &&
-            answer===question.dataset.correct
-        ){
-
-            correct++;
-
-        }
-
-    }
-
-    return correct;
-
-}
-
-
-/* =========================================================
-   LISTENING SCORE
-========================================================= */
-
-function calculateListening(){
-
-    let correct=0;
-
-    for(let i=1;i<=15;i++){
-
-        const answer=
-            getAnswer("l"+i);
-
-        const data=
-            [
-                ...listeningPart1,
-                ...listeningPart2,
-                ...listeningPart3
-            ].find(q=>q.number===i);
-
-        if(
-            data &&
-            answer===data.correct
-        ){
-
-            correct++;
-
-        }
-
-    }
-
-    return correct;
-
-}
-
-
-/* =========================================================
-   WRITING PART 1
-   TELC:
-   5 blanks × 1 = 5
-========================================================= */
-
-function normalize(value){
-
-    return String(value||"")
-    .trim()
-    .toLowerCase()
-    .replace(/\s+/g," ");
-
-}
-
-
-function checkNumber(value,expected){
-
-    const n=
-        normalize(value)
-        .replace(/[^0-9]/g,"");
-
-    return n===String(expected);
-
-}
-
-
-function evaluateWritingPart1(){
-
-    let score=0;
-    const details=[];
-
-    const persons=
-        document.getElementById(
-            "writePersons"
-        ).value;
-
-    if(checkNumber(persons,4)){
-
-        score++;
-        details.push("Anzahl der Personen: richtig");
-
-    }else{
-
-        details.push(
-            "Anzahl der Personen: falsch"
-        );
-
-    }
-
-
-    const children=
-        document.getElementById(
-            "writeChildren"
-        ).value;
-
-    if(checkNumber(children,2)){
-
-        score++;
-        details.push("Davon Kinder: richtig");
-
-    }else{
-
-        details.push(
-            "Davon Kinder: falsch"
-        );
-
-    }
-
-
-    const place=
-        normalize(
-            document.getElementById(
-                "writePlace"
-            ).value
-        );
-
-    if(
-        place==="seeheim" ||
-        place.includes("seeheim")
-    ){
-
-        score++;
-        details.push("Urlaubsort: richtig");
-
-    }else{
-
-        details.push(
-            "Urlaubsort: falsch"
-        );
-
-    }
-
-
-    const payment=
-        document.querySelector(
-            'input[name="payment"]:checked'
-        );
-
-    if(
-        payment &&
-        normalize(payment.value)==="bar"
-    ){
-
-        score++;
-        details.push("Zahlungsweise: richtig");
-
-    }else{
-
-        details.push(
-            "Zahlungsweise: falsch"
-        );
-
-    }
-
-
-    const date=
-        normalize(
-            document.getElementById(
-                "writeDate"
-            ).value
-        );
-
-    if(
-        date.includes("sonntag") ||
-        date.includes("sunday")
-    ){
-
-        score++;
-        details.push("Reisetermin: richtig");
-
-    }else{
-
-        details.push(
-            "Reisetermin: falsch"
-        );
-
-    }
-
-
-    return{
-        score,
-        details
-    };
-
-}
-
-
-/* =========================================================
-   WRITING PART 2
-   TELC RUBRIC = 10 POINTS
-========================================================= */
-
-function evaluateWritingPart2(){
-
-    const text=
-        document
-        .getElementById(
-            "writingAnswer"
-        )
-        .value
-        .trim();
-
-    const lower=
-        normalize(text);
-
-    const words=
-        text
-        ? text.split(/\s+/).filter(Boolean).length
-        : 0;
-
-    let score=0;
-
-    const points=[];
-
-
-    /*
-      Content Point 1:
-      Coming to Dresden in August.
-      0 / 1.5 / 3
-    */
-
-    const august=
-        lower.includes("august") ||
-        lower.includes("im 8.") ||
-        lower.includes("8.");
-
-    if(august){
-
-        score+=3;
-        points.push(
-            "Aufgabe 1: Dresden im August genannt"
-        );
-
-    }else{
-
-        points.push(
-            "Aufgabe 1: Dresden/August fehlt"
-        );
-
-    }
-
-
-    /*
-      Content Point 2:
-      Culture programme.
-    */
-
-    const cultureWords=[
-        "film",
-        "kino",
-        "theater",
-        "museum",
-        "museen",
-        "kultur",
-        "kulturprogramm"
-    ];
-
-    const hasCulture=
-        cultureWords.some(
-            word=>lower.includes(word)
-        );
-
-    if(hasCulture){
-
-        score+=3;
-        points.push(
-            "Aufgabe 2: Kulturprogramm angefragt"
-        );
-
-    }else{
-
-        points.push(
-            "Aufgabe 2: Kulturprogramm fehlt"
-        );
-
-    }
-
-
-    /*
-      Content Point 3:
-      Hotel addresses.
-    */
-
-    const hasHotel=
-        lower.includes("hotel") ||
-        lower.includes("unterkunft") ||
-        lower.includes("zimmer");
-
-    const hasAddress=
-        lower.includes("adresse") ||
-        lower.includes("adressen");
-
-    if(
-        hasHotel &&
-        (hasAddress || lower.includes("geben"))
-    ){
-
-        score+=3;
-
-        points.push(
-            "Aufgabe 3: Hoteladressen angefragt"
-        );
-
-    }else if(hasHotel){
-
-        score+=1.5;
-
-        points.push(
-            "Aufgabe 3: Hotel erwähnt, Adressen nicht eindeutig"
-        );
-
-    }else{
-
-        points.push(
-            "Aufgabe 3: Hoteladressen fehlen"
-        );
-
-    }
-
-
-    /*
-      Communicative design = 1 point
-    */
-
-    const hasGreeting=
-        lower.startsWith("hallo") ||
-        lower.startsWith("liebe") ||
-        lower.startsWith("lieber") ||
-        lower.includes("sehr geehrte");
-
-    const hasClosing=
-        lower.includes("mit freundlichen grüßen") ||
-        lower.includes("freundliche grüße") ||
-        lower.includes("viele grüße") ||
-        lower.includes("liebe grüße") ||
-        lower.includes("gruß");
-
-    if(
-        hasGreeting &&
-        hasClosing
-    ){
-
-        score+=1;
-
-        points.push(
-            "Textsortengerechte Anrede und Gruß vorhanden"
-        );
-
-    }else{
-
-        points.push(
-            "Anrede/Gruß nicht vollständig"
-        );
-
-    }
-
-
-    score=
-        Math.min(score,10);
-
-
-    return{
-        score,
-        words,
-        feedback:points
-    };
-
-}
-
-
-/* =========================================================
-   COMPLETE WRITING
-========================================================= */
-
-function evaluateWriting(){
-
-    const part1=
-        evaluateWritingPart1();
-
-    const part2=
-        evaluateWritingPart2();
-
-    return{
-
-        part1,
-        part2,
-
-        score:
-            part1.score+
-            part2.score,
-
-        words:
-            part2.words
-
-    };
-
-}
-
-
-/* =========================================================
-   PROGRESS
-========================================================= */
-
-function updateProgress(){
-
-    if(submitted)
-        return;
-
-    let answered=0;
-
-    for(let i=1;i<=15;i++){
-
-        if(getAnswer("r"+i))
-            answered++;
-
-    }
-
-    for(let i=1;i<=15;i++){
-
-        if(getAnswer("l"+i))
-            answered++;
-
-    }
-
-
-    const writingFields=[
-        "writePersons",
-        "writeChildren",
-        "writePlace",
-        "writeDate"
-    ];
-
-    writingFields.forEach(id=>{
-
-        if(
-            document
-            .getElementById(id)
-            .value
-            .trim()
-        ){
-
-            answered++;
-
-        }
-
-    });
-
-
-    if(
-        document.querySelector(
-            'input[name="payment"]:checked'
-        )
-    ){
-
-        answered++;
-
-    }
-
-
-    if(
-        document
-        .getElementById("writingAnswer")
-        .value
-        .trim()
-    ){
-
-        answered++;
-
-    }
-
-
-    const totalFields=
-        15+
-        15+
-        6+
-        1;
-
-
-    document
-    .getElementById("progress")
-    .style.width=
-        Math.min(
-            answered/totalFields*100,
-            100
-        )+"%";
-
-}
-
-
-/* =========================================================
-   WORD COUNT
-========================================================= */
-
-function updateWordCount(){
-
-    const text=
-        document
-        .getElementById(
-            "writingAnswer"
-        )
-        .value
-        .trim();
-
-    const words=
-        text
-        ? text.split(/\s+/).length
-        : 0;
-
-    document
-    .getElementById("wordCount")
-    .textContent=words;
-
-    updateProgress();
-
-}
-
-
-/* =========================================================
-   TIMER
-========================================================= */
-
-function updateTimer(){
-
-    if(!examStarted || submitted)
-        return;
-
-    const minutes=
-        Math.floor(secondsLeft/60);
-
-    const seconds=
-        secondsLeft%60;
-
-    document
-    .getElementById("timer")
-    .textContent=
-        `${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
-
-
-    if(secondsLeft<=0){
-
-        clearInterval(timerInterval);
-
-        localStorage.setItem(
-            DEVICE_LOCK_KEY,
-            "LOCKED"
-        );
-
-        submitExam(true);
-
-        return;
-
-    }
-
-    secondsLeft--;
-
-}
-
-
-/* =========================================================
-   SECURITY
-========================================================= */
-
-document.addEventListener(
-    "visibilitychange",
-    ()=>{
-
-        if(
-            examStarted &&
-            !submitted &&
-            document.visibilityState==="hidden"
-        ){
-
-            permanentlyLockDevice(
-                "Tab switching, minimizing or leaving the examination was detected. The examination has been permanently locked on this device."
-            );
-
-        }
-
-    }
-);
-
-
-window.addEventListener(
-    "beforeunload",
-    e=>{
-
-        if(
-            examStarted &&
-            !submitted
-        ){
-
-            e.preventDefault();
-            e.returnValue="";
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   START EXAM
-========================================================= */
-
-function beginExam(){
-
-    if(isDeviceLocked()){
-
-        document
-        .getElementById("startScreen")
-        .style.display="none";
-
-        document
-        .getElementById("lockScreen")
-        .classList.add("show");
-
-        document
-        .getElementById("lockReason")
-        .textContent=
-            "This device/browser has already been locked for this examination.";
-
-        return;
-
-    }
-
-
-    const input=
-        document.getElementById(
-            "studentName"
-        );
-
-    const name=
-        input.value.trim();
-
-
-    if(!name){
-
-        alert(
-            "Please enter your name before starting the exam."
-        );
-
-        input.focus();
-
-        return;
-
-    }
-
-
-    localStorage.setItem(
-        EXAM_ACTIVE_KEY,
-        "ACTIVE"
-    );
-
-
-    studentName=name;
-
-
-    document
-    .getElementById("candidateName")
-    .textContent=
-        studentName;
-
-
-    document
-    .getElementById("startScreen")
-    .style.display="none";
-
-
-    renderReadingPart1();
-    renderReadingPart2();
-    renderReadingPart3();
-    renderListening();
-
-
-    examStarted=true;
-
-    secondsLeft=
-        TOTAL_SECONDS;
-
-
-    updateTimer();
-
-
-    timerInterval=
-        setInterval(
-            updateTimer,
-            1000
-        );
-
-
-    document.addEventListener(
-        "change",
-        updateProgress
-    );
-
-
-    document.addEventListener(
-        "input",
-        updateProgress
-    );
-
-
-    if(
-        document.documentElement
-        .requestFullscreen
-    ){
-
-        document.documentElement
-        .requestFullscreen()
-        .catch(()=>{});
-
-    }
-
-}
-
-
-/* =========================================================
-   ENTER
-========================================================= */
-
-document
-.getElementById("studentName")
-.addEventListener(
-    "keydown",
-    e=>{
-
-        if(e.key==="Enter")
-            beginExam();
-
-    }
-);
-
-
-/* =========================================================
-   SUBMIT
-========================================================= */
-
-function submitExam(autoSubmit=false){
-
-    if(submitted)
-        return;
-
-
-    if(!autoSubmit){
-
-        const ok=
-            confirm(
-                "Möchten Sie den Test wirklich abgeben?"
-            );
-
-        if(!ok)
-            return;
-
-    }
-
-
-    submitted=true;
-    examStarted=false;
-
-
-    if(timerInterval)
-        clearInterval(timerInterval);
-
-
-    try{
-
-        document
-        .getElementById("telcAudio")
-        .pause();
-
-    }catch(e){}
-
-
-    const readingCorrect=
-        calculateReading();
-
-    const listeningCorrect=
-        calculateListening();
-
-    const writing=
-        evaluateWriting();
-
-
-    /*
-      15 Lesen questions = 15 marks
-      15 Hören questions = 15 marks
-      Schreiben = 15 marks
-    */
-
-    const readingScore=
-        readingCorrect;
-
-    const listeningScore=
-        listeningCorrect;
-
-    const writingScore=
-        writing.score;
-
-
-    const total=
-        readingScore+
-        listeningScore+
-        writingScore;
-
-
-    const percentage=
-        total/45*100;
-
-
-    finalExamData={
-
-        readingScore,
-        readingCorrect,
-
-        listeningScore,
-        listeningCorrect,
-
-        writing,
-
-        total,
-        percentage
-
-    };
-
-
-    localStorage.setItem(
-        DEVICE_LOCK_KEY,
-        "LOCKED"
-    );
-
-
-    document
-    .getElementById("exam")
-    .style.display="none";
-
-
-    document
-    .getElementById("topbar")
-    .style.display="none";
-
-
-    document
-    .getElementById("result")
-    .style.display="block";
-
-
-    document
-    .getElementById("resultName")
-    .textContent=
-        studentName;
-
-
-    document
-    .getElementById("totalScore")
-    .textContent=
-        `${formatScore(total)} / 45`;
-
-
-    document
-    .getElementById("percentage")
-    .textContent=
-        `${percentage.toFixed(1)}%`;
-
-
-    document
-    .getElementById("readingScore")
-    .textContent=
-        `${formatScore(readingScore)} / 15`;
-
-
-    document
-    .getElementById("listeningScore")
-    .textContent=
-        `${formatScore(listeningScore)} / 15`;
-
-
-    document
-    .getElementById("writingScore")
-    .textContent=
-        `${formatScore(writingScore)} / 15`;
-
-
-    let status;
-
-    if(percentage>=90){
-
-        status=
-            "Sehr gute Leistung 🎉";
-
-    }
-    else if(percentage>=80){
-
-        status=
-            "Gute Leistung 👍";
-
-    }
-    else if(percentage>=70){
-
-        status=
-            "Befriedigende Leistung ✅";
-
-    }
-    else if(percentage>=60){
-
-        status=
-            "Ausreichende Leistung 📚";
-
-    }
-    else{
-
-        status=
-            "Weitere Vorbereitung empfohlen 📖";
-
-    }
-
-
-    document
-    .getElementById("resultStatus")
-    .textContent=
-        status;
-
-
-    document
-    .getElementById("evaluationText")
-    .innerHTML=
-        buildEvaluation(
-            readingCorrect,
-            listeningCorrect,
-            writing
-        );
-
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-
-    setTimeout(
-        downloadAnswerPDF,
-        500
-    );
-
-}
-
-
-/* =========================================================
-   EVALUATION
-========================================================= */
-
-function buildEvaluation(
-    reading,
-    listening,
-    writing
-){
-
-    const strengths=[];
-    const improve=[];
-
-
-    if(reading>=11)
-        strengths.push("Lesen");
-    else
-        improve.push("Lesen");
-
-
-    if(listening>=11)
-        strengths.push("Hören");
-    else
-        improve.push("Hören");
-
-
-    if(writing.score>=11)
-        strengths.push("Schreiben");
-    else
-        improve.push("Schreiben");
-
-
-    return `
-
-    <p>
-        <b>Gesamt:</b>
-        ${finalExamData.total} / 45
-        (${finalExamData.percentage.toFixed(1)}%)
-    </p>
-
-    <p>
-        <b>Stärken:</b>
-        ${
-            strengths.length
-            ? strengths.join(", ")
-            : "Noch kein klarer Stärkebereich."
-        }
-    </p>
-
-    <p>
-        <b>Weiter üben:</b>
-        ${
-            improve.length
-            ? improve.join(", ")
-            : "Alle drei Bereiche zeigen eine starke Leistung."
-        }
-    </p>
-
-    <hr>
-
-    <p>
-        <b>Schreiben – Teil 1:</b>
-        ${writing.part1.score} / 5
-    </p>
-
-    <p>
-        ${writing.part1.details.join("<br>")}
-    </p>
-
-    <p>
-        <b>Schreiben – Teil 2:</b>
-        ${writing.part2.score} / 10
-    </p>
-
-    <p>
-        ${writing.part2.feedback.join("<br>")}
-    </p>
-
-    <p>
-        <b>Geschriebene Wörter:</b>
-        ${writing.words}
-    </p>
-
-    `;
-
-}
-
-
-/* =========================================================
-   FORMAT
-========================================================= */
-
-function formatScore(num){
-
-    return Number.isInteger(num)
-        ? num
-        : Number(num).toFixed(2);
-
-}
-
-
-/* =========================================================
-   PDF HELPERS
-========================================================= */
-
-function pdfText(
-    doc,
-    text,
-    x,
-    y,
-    maxWidth,
-    lineHeight=5
-){
-
-    const lines=
-        doc.splitTextToSize(
-            String(text),
-            maxWidth
-        );
-
-    doc.text(
-        lines,
-        x,
-        y
-    );
-
-    return y+
-        lines.length*
-        lineHeight;
-
-}
-
-
-/* =========================================================
-   COLLECT ANSWERS
-========================================================= */
-
-function collectPDFAnswers(){
-
-    const answers=[];
-
-
-    readingPart1.forEach(q=>{
-
-        answers.push({
-
-            section:"Lesen Teil 1",
-            number:q.number,
-            question:q.question,
-            answer:getAnswer("r"+q.number),
-            correct:q.correct
-
-        });
-
-    });
-
-
-    readingPart2.forEach(q=>{
-
-        answers.push({
-
-            section:"Lesen Teil 2",
-            number:q.number,
-            question:q.situation,
-            answer:getAnswer("r"+q.number),
-            correct:q.correct
-
-        });
-
-    });
-
-
-    readingPart3.forEach(q=>{
-
-        answers.push({
-
-            section:"Lesen Teil 3",
-            number:q.number,
-            question:q.question,
-            answer:getAnswer("r"+q.number),
-            correct:q.correct
-
-        });
-
-    });
-
-
-    [
-        ...listeningPart1,
-        ...listeningPart2,
-        ...listeningPart3
-    ].forEach(q=>{
-
-        answers.push({
-
-            section:"Hören",
-            number:q.number,
-            question:q.question,
-            answer:getAnswer("l"+q.number),
-            correct:q.correct
-
-        });
-
-    });
-
-
-    return answers;
-
-}
-
-
-/* =========================================================
-   DOWNLOAD PDF
-========================================================= */
-
-function downloadAnswerPDF(){
-
-    if(!finalExamData)
-        return;
-
-
-    if(
-        !window.jspdf ||
-        !window.jspdf.jsPDF
-    ){
-
-        alert(
-            "PDF library could not load. Please check your internet connection."
-        );
-
-        return;
-
-    }
-
-
-    const {
-        readingScore,
-        listeningScore,
-        writing,
-        total,
-        percentage
-    }=finalExamData;
-
-
-    const {jsPDF}=window.jspdf;
-
-
-    const doc=
-        new jsPDF({
-            orientation:"portrait",
-            unit:"mm",
-            format:"a4"
-        });
-
-
-    let y=18;
-
-
-    doc.setFont(
-        "helvetica",
-        "bold"
-    );
-
-    doc.setFontSize(20);
-
-    doc.text(
-        "Deutsch mit Jitu",
-        15,
-        y
-    );
-
-    y+=8;
-
-
-    doc.setFontSize(15);
-
-    doc.text(
-        "TELC Deutsch A1 — Answer Report",
-        15,
-        y
-    );
-
-    y+=8;
-
-
-    doc.setFont(
-        "helvetica",
-        "normal"
-    );
-
-    doc.setFontSize(10);
-
-    doc.text(
-        "Student: "+studentName,
-        15,
-        y
-    );
-
-    y+=5;
-
-    doc.text(
-        "Exam: Start Deutsch 1 — Übungstest 1",
-        15,
-        y
-    );
-
-    y+=5;
-
-    doc.text(
-        "Duration: 70 Minutes",
-        15,
-        y
-    );
-
-    y+=8;
-
-
-    doc.setFont(
-        "helvetica",
-        "bold"
-    );
-
-    doc.setFontSize(16);
-
-    doc.text(
-        `TOTAL SCORE: ${formatScore(total)} / 45`,
-        15,
-        y
-    );
-
-    y+=7;
-
-
-    doc.setFontSize(12);
-
-    doc.text(
-        `PERCENTAGE: ${percentage.toFixed(1)}%`,
-        15,
-        y
-    );
-
-    y+=8;
-
-
-    doc.setFont(
-        "helvetica",
-        "normal"
-    );
-
-    doc.setFontSize(10);
-
-    doc.text(
-        `Hören: ${listeningScore} / 15`,
-        15,
-        y
-    );
-
-    doc.text(
-        `Lesen: ${readingScore} / 15`,
-        75,
-        y
-    );
-
-    y+=5;
-
-    doc.text(
-        `Schreiben: ${writing.score} / 15`,
-        15,
-        y
-    );
-
-    y+=10;
-
-
-    doc.setFont(
-        "helvetica",
-        "bold"
-    );
-
-    doc.setFontSize(14);
-
-    doc.text(
-        "ANSWER & EVALUATION REPORT",
-        15,
-        y
-    );
-
-    y+=8;
-
-
-    const answers=
-        collectPDFAnswers();
-
-
-    answers.forEach(item=>{
-
-        if(y>268){
-
-            doc.addPage();
-
-            y=18;
-
-        }
-
-
-        doc.setFont(
-            "helvetica",
-            "bold"
-        );
-
-        doc.setFontSize(9);
-
-        y=
-            pdfText(
-                doc,
-                `${item.section} — Aufgabe ${item.number}`,
-                15,
-                y,
-                180,
-                4
-            );
-
-
-        doc.setFont(
-            "helvetica",
-            "normal"
-        );
-
-
-        y=
-            pdfText(
-                doc,
-                "Question: "+item.question,
-                15,
-                y+1,
-                180,
-                4
-            );
-
-
-        y=
-            pdfText(
-                doc,
-                "Your Answer: "+
-                (
-                    item.answer ||
-                    "Not Answered"
-                ),
-                15,
-                y+1,
-                180,
-                4
-            );
-
-
-        y=
-            pdfText(
-                doc,
-                "Correct Answer: "+item.correct,
-                15,
-                y+1,
-                180,
-                4
-            );
-
-
-        const status=
-            item.answer===item.correct
-            ? "STATUS: CORRECT"
-            : "STATUS: WRONG";
-
-
-        y=
-            pdfText(
-                doc,
-                status,
-                15,
-                y+1,
-                180,
-                4
-            );
-
-
-        y+=4;
-
-        doc.line(
-            15,
-            y,
-            195,
-            y
-        );
-
-        y+=5;
-
-    });
-
-
-    /* ================= WRITING REPORT ================= */
-
-    if(y>245){
-
-        doc.addPage();
-
-        y=18;
-
-    }
-
-
-    doc.setFont(
-        "helvetica",
-        "bold"
-    );
-
-    doc.setFontSize(14);
-
-    doc.text(
-        "SCHREIBEN — EVALUATION",
-        15,
-        y
-    );
-
-    y+=8;
-
-
-    doc.setFont(
-        "helvetica",
-        "normal"
-    );
-
-    doc.setFontSize(10);
-
-
-    const persons=
-        document.getElementById(
-            "writePersons"
-        ).value;
-
-    const children=
-        document.getElementById(
-            "writeChildren"
-        ).value;
-
-    const place=
-        document.getElementById(
-            "writePlace"
-        ).value;
-
-    const payment=
-        document.querySelector(
-            'input[name="payment"]:checked'
-        );
-
-    const date=
-        document.getElementById(
-            "writeDate"
-        ).value;
-
-
-    y=
-        pdfText(
-            doc,
-            "Teil 1 — Formular",
-            15,
-            y,
-            180,
-            5
-        );
-
-
-    y=
-        pdfText(
-            doc,
-            `Anzahl der Personen: ${persons || "Nicht beantwortet"}`,
-            15,
-            y+2,
-            180,
-            5
-        );
-
-
-    y=
-        pdfText(
-            doc,
-            `Davon Kinder: ${children || "Nicht beantwortet"}`,
-            15,
-            y+2,
-            180,
-            5
-        );
-
-
-    y=
-        pdfText(
-            doc,
-            `PLZ, Urlaubsort: ${place || "Nicht beantwortet"}`,
-            15,
-            y+2,
-            180,
-            5
-        );
-
-
-    y=
-        pdfText(
-            doc,
-            `Zahlungsweise: ${
-                payment
-                ? payment.value
-                : "Nicht beantwortet"
-            }`,
-            15,
-            y+2,
-            180,
-            5
-        );
-
-
-    y=
-        pdfText(
-            doc,
-            `Reisetermin: ${date || "Nicht beantwortet"}`,
-            15,
-            y+2,
-            180,
-            5
-        );
-
-
-    y+=5;
-
-
-    doc.setFont(
-        "helvetica",
-        "bold"
-    );
-
-    doc.text(
-        `Teil 1 Score: ${writing.part1.score} / 5`,
-        15,
-        y
-    );
-
-    y+=10;
-
-
-    doc.setFontSize(14);
-
-    doc.text(
-        "Teil 2 — Student Response",
-        15,
-        y
-    );
-
-    y+=8;
-
-
-    doc.setFont(
-        "helvetica",
-        "normal"
-    );
-
-    doc.setFontSize(9);
-
-
-    const writingText=
-        document
-        .getElementById(
-            "writingAnswer"
-        )
-        .value
-        .trim();
-
-
-    y=
-        pdfText(
-            doc,
-            writingText ||
-            "No writing submitted.",
-            15,
-            y,
-            180,
-            4
-        );
-
-
-    y+=7;
-
-
-    doc.setFont(
-        "helvetica",
-        "bold"
-    );
-
-    doc.setFontSize(10);
-
-    doc.text(
-        `Teil 2 Score: ${writing.part2.score} / 10`,
-        15,
-        y
-    );
-
-    y+=7;
-
-
-    doc.setFont(
-        "helvetica",
-        "normal"
-    );
-
-
-    y=
-        pdfText(
-            doc,
-            `Word Count: ${writing.words}`,
-            15,
-            y,
-            180,
-            4
-        );
-
-
-    y+=5;
-
-
-    writing.part2.feedback.forEach(
-        item=>{
-
-            y=
-                pdfText(
-                    doc,
-                    "• "+item,
-                    15,
-                    y,
-                    180,
-                    4
-                );
-
-        }
-    );
-
-
-    /* ================= FOOTER ================= */
-
-    const pageCount=
-        doc.getNumberOfPages();
-
-
-    for(
-        let page=1;
-        page<=pageCount;
-        page++
-    ){
-
-        doc.setPage(page);
-
-        doc.setFontSize(8);
-
-        doc.text(
-            `Deutsch mit Jitu | ${studentName} | Page ${page}/${pageCount}`,
-            15,
-            288
-        );
-
-    }
-
-
-    const safeName=
-        studentName
-        .replace(/[^a-z0-9]/gi,"_")
-        .substring(0,40);
-
-
-    doc.save(
-        `Deutsch_mit_Jitu_${safeName}_TELC_A1_Answer_Report.pdf`
-    );
-
-}
-
-
-/* =========================================================
-   INITIAL SAFETY CHECK
-========================================================= */
-
-window.addEventListener(
-    "load",
-    ()=>{
-
-        if(isDeviceLocked()){
-
-            document
-            .getElementById("startScreen")
-            .style.display="none";
-
-            document
-            .getElementById("lockScreen")
-            .classList.add("show");
-
-            document
-            .getElementById("lockReason")
-            .textContent=
-                "This device/browser has already been locked for this examination.";
-
-        }
-
-    }
-);
+});
 
 </script>
 
